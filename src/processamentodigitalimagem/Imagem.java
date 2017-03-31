@@ -300,7 +300,7 @@ public class Imagem {
                 for (int b = 0; b < px.length; b++) {
                     px[b] = rastro.getSample(x, y,b);
                     px[b] = px[b]*matrizTipo[x][y]; 
-                    
+                    matriz_original[x][y][b] = px[b];
                 }
           
             }
