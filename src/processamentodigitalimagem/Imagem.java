@@ -289,63 +289,136 @@ public class Imagem {
         
     }
     
-     
-    public Integer[][][] getMultiplicaMatriz( Integer [][] matrizTipo ) {
+ 
+    public Integer[][][] multiplicaMatriz(int xoffset,int yoffset){
+        int minX = 0;
+        int minY = 0;
+        Integer[][][] matriz_retorno = new Integer[this.largura][this.altura][3];
         
-        Raster rastro = this.imagem.getData();
-        int px[] = new int[3];
-        this.matriz_original = new Integer[this.largura][this.altura][px.length];
-        for (int x = 0; x < this.largura; x++) {
-            for (int y = 0; y < this.altura; y++) {
-                for (int b = 0; b < px.length; b++) {
-                    px[b] = rastro.getSample(x, y,b);
-                    px[b] = px[b]*matrizTipo[x][y]; 
-                    matriz_original[x][y][b] = px[b];
+        for(int x=0;x<this.largura;x++){
+            for(int y=0;y<this.altura;y++){
+                Integer[] px = this.matriz_original[x][y];
+               
+                int newX = (int)((x*this.matriz_multiplicacao[0][0])+(y*this.matriz_multiplicacao[0][1])+(1*this.matriz_multiplicacao[0][2]));
+                int newY = (int)((x*this.matriz_multiplicacao[1][0])+(y*this.matriz_multiplicacao[1][1])+(1*this.matriz_multiplicacao[1][2]));
+                
+                newX = newX + xoffset;
+                newY = newY + yoffset;
+                if(newX < minX){
+                    minX = newX;
                 }
-          
+                if(newY < minY){
+                    minY = newY;
+                }
+                if(newX < this.largura && newY < this.altura && newX >= 0 && newY >=0){
+                    matriz_retorno[newX][newY] = px;
+                }
             }
         }
-        this.matriz_temp = this.matriz_original;
-        return matriz_original;
-    }
-
-        public Integer[][][] getMatrizTranslacao(int tx, int ty){
-        Integer[][] matrizTipo = new Integer[3][3];
-        Integer[][][] matriz = new Integer[this.largura][this.altura][3];          
-            matrizTipo[0][0] = 1;
-            matrizTipo[0][1] = 0;
-            matrizTipo[0][2] = tx;
-            matrizTipo[1][0] = 0;
-            matrizTipo[1][1] = 1;
-            matrizTipo[1][0] = ty;
-            matrizTipo[2][0] = 0;
-            matrizTipo[2][1] = 0;
-            matrizTipo[2][2] = 1;
-            
-            matriz = getMultiplicaMatriz(matrizTipo);
+        xoffset = minX * -1;
+        yoffset = minY * -1;
+        if(xoffset != 0 || yoffset != 0){
+            matriz_retorno = multiplicaMatriz(xoffset, yoffset);//a posição inicial precisa ser 0
+        }
         
-        return matriz;
+        return matriz_retorno;
     }
-
-
+     public Integer[][][] getMatrizRotacao(int angulo){
+        this.resetMatrizMult();
+        double radianos = Math.toRadians(angulo);
+        double seno = Math.sin(radianos);
+        double cosseno = Math.cos(radianos);
+        
+        this.setXYMatrizMult(0, 0, cosseno);
+        this.setXYMatrizMult(0, 1, -1*seno);
+        this.setXYMatrizMult(1, 0, seno);
+        this.setXYMatrizMult(1, 1, cosseno);
+        this.setXYMatrizMult(2, 2, 1);
+        return this.multiplicaMatriz(0,0);
+    }
     
-//    public Integer[][][] getMatrizTranslacao(int tx, int ty){
-//        Integer[][][] matriz = new Integer[this.largura][this.altura][3];
+        public Integer[][][] getMatrizEspelhamento(int direcao){
+        this.resetMatrizMult();
+        if(direcao == 0){//horizontal
+            this.setXYMatrizMult(0, 0, -1);
+            this.setXYMatrizMult(1, 1, 1);
+            this.setXYMatrizMult(2, 2, 1);
+        }else{//vertical
+            this.setXYMatrizMult(0, 0, 1);
+            this.setXYMatrizMult(1, 1, -1);
+            this.setXYMatrizMult(2, 2, 1);
+        }
+        
+        return this.multiplicaMatriz(0, 0);
+    }
+    
+//    public Integer[][][] getMatrizTranslacao(int x, int y){
+//     this.resetMatrizMult();
+//        this.setXYMatrizMult(0, 2, x);
+//        this.setXYMatrizMult(1, 2, y);
+//        this.setXYMatrizMult(2, 2, 1);
 //        
-//        for(int x = 0;x<this.largura;x++){
-//            for(int y = 0;y<this.altura;y++){
-//                Integer px[] = this.matriz_original[x][y];
+//        return this.multiplicaMatriz(0, 0);
+//    }
+//    public Integer[][][] getMultiplicaMatriz( Integer [][] matrizTipo ) {
+//        
+//        Raster rastro = this.imagem.getData();
+//       //int px[] = new int[3];
+//       // this.matriz_original = new Integer[this.largura][this.altura][px.length];
+//        for (int x = 0; x < this.largura; x++) {
+//            for (int y = 0; y < this.altura; y++) {
+//                Integer[] px = this.matriz_original[x][y];
+//                int newX = (int)Math.round((x*this.matriz_multiplicacao[0][0])+(y*this.matriz_multiplicacao[0][1])+(1*this.matriz_multiplicacao[0][2]));
+//                int newY = (int)Math.round((x*this.matriz_multiplicacao[1][0])+(y*this.matriz_multiplicacao[1][1])+(1*this.matriz_multiplicacao[1][2]));
+//                    px[] = rastro.getSample(x, y);
+//                    System.out.println(px);
+//                    px[] = px[b]*matrizTipo[x][y]; 
+//                    matriz_original[x][y] = px[];
 //                
-//                int newX = x + tx;
-//                int newY = y + ty;
-//                if(newX < this.largura && newY < this.altura && newX >= 0 && newY >=0){
-//                    matriz[newX][newY] = px;
-//                }
+//          
 //            }
 //        }
+//        this.matriz_temp = this.matriz_original;
+//        return matriz_original;
+//    }
+
+//        public Integer[][][] getMatrizTranslacao(int tx, int ty){
+//        Integer[][] matrizTipo = new Integer[3][3];
+//        Integer[][][] matriz = new Integer[this.largura][this.altura][3];          
+//            matrizTipo[0][0] = 1;
+//            matrizTipo[0][1] = 0;
+//            matrizTipo[0][2] = tx;
+//            matrizTipo[1][0] = 0;
+//            matrizTipo[1][1] = 1;
+//            matrizTipo[1][0] = ty;
+//            matrizTipo[2][0] = 0;
+//            matrizTipo[2][1] = 0;
+//            matrizTipo[2][2] = 1;
+//            
+//            matriz = getMultiplicaMatriz();
 //        
 //        return matriz;
 //    }
+
+
+    
+   public Integer[][][] getMatrizTranslacao(int tx, int ty){
+        Integer[][][] matriz = new Integer[this.largura][this.altura][3];
+        
+        for(int x = 0;x<this.largura;x++){
+            for(int y = 0;y<this.altura;y++){
+                Integer px[] = this.matriz_original[x][y];
+                
+                int newX = x + tx;
+                int newY = y + ty;
+                if(newX < this.largura && newY < this.altura && newX >= 0 && newY >=0){
+                    matriz[newX][newY] = px;
+                }
+            }
+       }
+       
+       return matriz;
+    }
     
     
     
