@@ -351,7 +351,17 @@ public class Imagem {
         
         return this.multiplicaMatriz(0, 0);
     }
-    
+        public Integer[][][] getZoom(double nivel){
+        this.resetMatrizMult();
+        this.setXYMatrizMult(0, 0, nivel);
+        this.setXYMatrizMult(1, 1, nivel);
+        this.setXYMatrizMult(2, 2, 1);
+        
+        return this.multiplicaMatriz(0,0);
+    }
+        
+        
+        
 //    public Integer[][][] getMatrizTranslacao(int x, int y){
 //     this.resetMatrizMult();
 //        this.setXYMatrizMult(0, 2, x);
