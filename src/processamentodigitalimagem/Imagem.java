@@ -30,12 +30,13 @@ import org.jfree.chart.JFreeChart;
  * @author dn34083
  */
 public class Imagem {
-       private String imagem_path;
+    private String imagem_path;
     public BufferedImage imagem = null;
     public Integer largura;
     public Integer altura;
     private Integer[][] matriz_cinza;
     private Integer[][][] matriz_original;
+    private Integer[][][] matriz_bkp;
     private Integer[][][] matriz_temp = null;
     private double[][] matriz_multiplicacao = new double[3][3];
     
@@ -73,6 +74,7 @@ public class Imagem {
             this.load_image_properties();
             this.matriz_cinza = this.getMatrizCinza();
             return this.imagem;
+            
         }
         return null;
     }
@@ -90,7 +92,7 @@ public class Imagem {
         img_cinza.setData(wRastro);
         return img_cinza;
     }
-     public BufferedImage get_imagem_exercicio(String selectedItem) {
+     public BufferedImage getImagemExercicio(String selectedItem) {
           System.out.println(selectedItem);
         BufferedImage imgExercicio = new BufferedImage(this.largura, this.altura, BufferedImage.TYPE_INT_RGB);
         WritableRaster wRastro = imgExercicio.getRaster();
@@ -298,7 +300,7 @@ public class Imagem {
         for(int x=0;x<this.largura;x++){
             for(int y=0;y<this.altura;y++){
                 Integer[] px = this.matriz_original[x][y];
-               
+                //Integer[] px = this.matriz_temp[x][y];
                 int newX = (int)((x*this.matriz_multiplicacao[0][0])+(y*this.matriz_multiplicacao[0][1])+(1*this.matriz_multiplicacao[0][2]));
                 int newY = (int)((x*this.matriz_multiplicacao[1][0])+(y*this.matriz_multiplicacao[1][1])+(1*this.matriz_multiplicacao[1][2]));
                 
@@ -356,6 +358,7 @@ public class Imagem {
         this.setXYMatrizMult(0, 0, nivel);
         this.setXYMatrizMult(1, 1, nivel);
         this.setXYMatrizMult(2, 2, 1);
+        
         
         return this.multiplicaMatriz(0,0);
     }

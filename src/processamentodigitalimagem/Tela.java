@@ -26,6 +26,7 @@ public class Tela extends javax.swing.JFrame {
     private Imagem imagemObj = new Imagem();
   // private JLabel lblImagem = new JLabel();
      private BufferedImage imagemOriginal;
+     private BufferedImage imagemAlterada; 
 
     /**
      * Creates new form Tela
@@ -51,7 +52,7 @@ public class Tela extends javax.swing.JFrame {
      
      private void carregaImagem(File arquivo) throws IOException {
         this.imagemOriginal = ImageIO.read(arquivo);
-        //this.painelImagemOriginal.setImagem(imagemOriginal);
+       // this.painelImagemOriginal.setImagem(imagemOriginal);
         carregaImagemOriginal();
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -196,21 +197,25 @@ public class Tela extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(btExercicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(cboxExercicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(btExercicio, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cboxExercicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(45, 45, 45)))
+                .addGap(41, 41, 41))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cboxExercicio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btExercicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -292,7 +297,7 @@ public class Tela extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(lblImagembkp, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                .addComponent(lblImagembkp, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
                 .addGap(19, 19, 19))
         );
         jPanel3Layout.setVerticalGroup(
@@ -313,7 +318,7 @@ public class Tela extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 425, Short.MAX_VALUE)
+            .addGap(0, 424, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(27, 27, 27)
@@ -414,8 +419,9 @@ public class Tela extends javax.swing.JFrame {
 
         jLabel12.setText("Zoom:");
 
-        sliderZoom.setMaximum(200);
-        sliderZoom.setMinimum(-200);
+        sliderZoom.setMajorTickSpacing(1);
+        sliderZoom.setMaximum(4);
+        sliderZoom.setMinimum(-4);
         sliderZoom.setPaintLabels(true);
         sliderZoom.setToolTipText("");
         sliderZoom.setValue(0);
@@ -442,28 +448,27 @@ public class Tela extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(sliderZoom, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addComponent(jLabel12)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(sliderZoom, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGap(0, 70, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(60, 60, 60))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(sliderZoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addComponent(sliderZoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Arquivo");
@@ -522,12 +527,12 @@ public class Tela extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpanel0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -539,19 +544,19 @@ public class Tela extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jpanel0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jpanel0, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(73, 73, 73))
         );
 
@@ -563,11 +568,9 @@ public class Tela extends javax.swing.JFrame {
         // TODO add your handling code here:
                  try {
             BufferedImage img = this.imagemObj.find_imagem();
+            
             if(img != null){
-//                if(JOptionPane.showConfirmDialog(this.getContentPane(), "Mostrar imagem em cinza?", "", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-                    //img = this.imagemObj.get_imagem_cinza();
-//                }
-                //this.showImage(img);
+
                 this.showImageoriginal(img);
             }
         } catch (IOException ex) {
@@ -610,7 +613,7 @@ public class Tela extends javax.swing.JFrame {
         // TODO add your handling code here:
         String teste = cboxExercicio.getSelectedItem().toString();
         //System.out.println(teste);
-        BufferedImage imgNova = this.imagemObj.get_imagem_exercicio(teste);
+        BufferedImage imgNova = this.imagemObj.getImagemExercicio(teste);
         this.showImage(imgNova);
     }//GEN-LAST:event_btExercicioActionPerformed
 
@@ -656,35 +659,51 @@ public class Tela extends javax.swing.JFrame {
 
     private void sliderZoomAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_sliderZoomAncestorMoved
         // TODO add your handling code here:
-//        double zoom = sliderZoom.getValue();
-//        
-//       // boolean teste = sliderZoom.getValueIsAdjusting();
-//        
-//        if(zoom != 0){
-//            
-//            Integer matriz[][][] = this.imagemObj.getZoom(50);
-//            this.showImage(this.imagemObj.createImagemByMatriz(matriz));
-//        }
-        
         
     }//GEN-LAST:event_sliderZoomAncestorMoved
 
     private void sliderZoomAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_sliderZoomAncestorAdded
         // TODO add your handling code here:
-//       double zoom = sliderZoom.getValue();
-//       String teste = sliderZoom.getSize().toString();
-//       System.out.println("double" + teste);
-//       if(zoom != 0){
-//            
-//            Integer matriz[][][] = this.imagemObj.getZoom(50);
-//            this.showImage(this.imagemObj.createImagemByMatriz(matriz));
-//        }
+
     }//GEN-LAST:event_sliderZoomAncestorAdded
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Integer matriz[][][] = this.imagemObj.getZoom(sliderZoom.getValue()/100);
+        double zoom = 0;
+        double aux = sliderZoom.getValue();
+        switch ((int)aux){
+            case 1:
+                zoom =1.5;
+            break;
+            case 2:
+                zoom =2;
+            break;  
+            case -1:
+                zoom =0.75;
+            break;
+            case -2:
+                zoom =0.5;
+            break;
+            case 0:
+                zoom =1;
+            break;    
+            case 3:
+                zoom = 2.5;
+                break;
+            case -3:
+                zoom = 0.25;
+                break;
+            case 4:
+                zoom =3;
+            break;
+            case -4:
+                zoom =0.1;
+            break; 
+        }
+        Integer matriz[][][] = this.imagemObj.getZoom(zoom);
+      //  System.out.println("Valor de Zoom " + aux );
         this.showImage(this.imagemObj.createImagemByMatriz(matriz));
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static File getApplicationImagesPath(){
@@ -774,7 +793,7 @@ public class Tela extends javax.swing.JFrame {
     private javax.swing.JPanel jpanel0;
     private javax.swing.JLabel lblImagem;
     private javax.swing.JLabel lblImagembkp;
-    private javax.swing.JSlider sliderZoom;
+    private static javax.swing.JSlider sliderZoom;
     private javax.swing.JTextField txtMedia;
     private javax.swing.JTextField txtMediana;
     private javax.swing.JTextField txtModa;
