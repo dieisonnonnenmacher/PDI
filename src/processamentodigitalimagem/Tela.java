@@ -328,7 +328,7 @@ public class Tela extends javax.swing.JFrame {
 
         jLabel11.setText("Rotacao");
 
-        cboxRotacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "90°", "180°", "360°" }));
+        cboxRotacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "90°", "180°" }));
 
         btRotacao.setText("Executar");
         btRotacao.addActionListener(new java.awt.event.ActionListener() {
@@ -627,12 +627,9 @@ public class Tela extends javax.swing.JFrame {
         int graus = 0;
         if (cboxRotacao.getSelectedIndex() == 0){
             graus = 90;
-        }else if (cboxRotacao.getSelectedIndex() == 1){
+        }else {
             graus =180;
-        }else{
-            graus = 360;        
-         }
-       
+        }
         Integer matriz[][][] = this.imagemObj.getMatrizRotacao(graus);
         this.showImage(this.imagemObj.createImagemByMatriz(matriz));
     }//GEN-LAST:event_btRotacaoActionPerformed
