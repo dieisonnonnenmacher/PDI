@@ -80,10 +80,6 @@ public class Tela extends javax.swing.JFrame {
         txtTransladarX = new javax.swing.JTextField();
         txtTransladarY = new javax.swing.JTextField();
         btTransladar = new javax.swing.JToggleButton();
-        jPanel3 = new javax.swing.JPanel();
-        lblImagembkp = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        lblImagem = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         cboxDirecao = new javax.swing.JComboBox();
@@ -96,13 +92,19 @@ public class Tela extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         sliderZoom = new javax.swing.JSlider();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lblImagem = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lblImagembkp = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         bAbrirImagem = new javax.swing.JMenuItem();
+        btSalvar = new javax.swing.JMenuItem();
         btEdit = new javax.swing.JMenu();
         btCinza = new javax.swing.JMenuItem();
         btHistograma = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        btReset = new javax.swing.JMenuItem();
 
         jLabel5.setText("jLabel5");
 
@@ -134,21 +136,21 @@ public class Tela extends javax.swing.JFrame {
             .addGroup(jpanel0Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jpanel0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btCalcular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jpanel0Layout.createSequentialGroup()
-                        .addGroup(jpanel0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpanel0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtMediana, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtModa)
-                            .addComponent(txtVarianciaa)
-                            .addComponent(txtMedia))
-                        .addGap(34, 34, 34)))
-                .addGap(14, 14, 14))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpanel0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtMediana, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(txtModa)
+                    .addComponent(txtVarianciaa)
+                    .addComponent(txtMedia))
+                .addGap(48, 48, 48))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanel0Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btCalcular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jpanel0Layout.setVerticalGroup(
             jpanel0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,59 +282,6 @@ public class Tela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btTransladar, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addContainerGap(18, Short.MAX_VALUE))
-        );
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.setToolTipText("");
-        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel3.setDoubleBuffered(false);
-        jPanel3.setOpaque(false);
-
-        lblImagembkp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblImagembkp.setOpaque(true);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(lblImagembkp, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
-                .addGap(19, 19, 19))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblImagembkp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.setPreferredSize(new java.awt.Dimension(462, 651));
-
-        lblImagem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblImagem.setOpaque(true);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addGap(27, 27, 27)
-                    .addComponent(lblImagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(27, 27, 27)))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(lblImagem, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -471,6 +420,20 @@ public class Tela extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblImagem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImagem.setAutoscrolls(true);
+        lblImagem.setOpaque(true);
+        jScrollPane1.setViewportView(lblImagem);
+
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jScrollPane2.setViewportBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblImagembkp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImagembkp.setOpaque(true);
+        jScrollPane2.setViewportView(lblImagembkp);
+
         jMenu1.setText("Arquivo");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -485,6 +448,14 @@ public class Tela extends javax.swing.JFrame {
             }
         });
         jMenu1.add(bAbrirImagem);
+
+        btSalvar.setText("Salvar alterações");
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalvarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btSalvar);
 
         jMenuBar1.add(jMenu1);
 
@@ -515,6 +486,14 @@ public class Tela extends javax.swing.JFrame {
         });
         btHistograma.add(jMenuItem1);
 
+        btReset.setText("Restaurar Matriz");
+        btReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btResetActionPerformed(evt);
+            }
+        });
+        btHistograma.add(btReset);
+
         jMenuBar1.add(btHistograma);
 
         setJMenuBar(jMenuBar1);
@@ -524,11 +503,11 @@ public class Tela extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
-                .addGap(32, 32, 32)
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -543,8 +522,8 @@ public class Tela extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jpanel0, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -653,6 +632,7 @@ public class Tela extends javax.swing.JFrame {
         }else{
             graus = 360;        
          }
+       
         Integer matriz[][][] = this.imagemObj.getMatrizRotacao(graus);
         this.showImage(this.imagemObj.createImagemByMatriz(matriz));
     }//GEN-LAST:event_btRotacaoActionPerformed
@@ -671,12 +651,15 @@ public class Tela extends javax.swing.JFrame {
         // TODO add your handling code here:
         double zoom = 0;
         double aux = sliderZoom.getValue();
+        double altura;
+        double largura;
         switch ((int)aux){
             case 1:
-                zoom =1.5;
+                zoom =1.25;
+               
             break;
             case 2:
-                zoom =2;
+                zoom =1.5;
             break;  
             case -1:
                 zoom =0.75;
@@ -688,23 +671,38 @@ public class Tela extends javax.swing.JFrame {
                 zoom =1;
             break;    
             case 3:
-                zoom = 2.5;
+                zoom = 2;
                 break;
             case -3:
                 zoom = 0.25;
                 break;
             case 4:
-                zoom =3;
+                zoom =2.25;
             break;
             case -4:
                 zoom =0.1;
             break; 
         }
         Integer matriz[][][] = this.imagemObj.getZoom(zoom);
+        
       //  System.out.println("Valor de Zoom " + aux );
         this.showImage(this.imagemObj.createImagemByMatriz(matriz));
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResetActionPerformed
+        // TODO add your handling code here:
+        Integer matriz[][][] = this.imagemObj.resetMatriz();
+        this.showImage(this.imagemObj.createImagemByMatriz(matriz));
+        
+    }//GEN-LAST:event_btResetActionPerformed
+
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        // TODO add your handling code here:
+        Integer matriz[][][] = this.imagemObj.getSalvar();
+        this.showImageoriginal(this.imagemObj.createImagemByMatriz(matriz));
+       
+    }//GEN-LAST:event_btSalvarActionPerformed
 
     public static File getApplicationImagesPath(){
        File folder = new File("./imagens/");
@@ -712,10 +710,13 @@ public class Tela extends javax.swing.JFrame {
      }
     private void showImage(BufferedImage img){
         ImageIcon icon = new ImageIcon(img);
+        //lblImagem.setSize(img.getWidth(), img.getHeight());
+            
         lblImagem.setIcon(icon);
        
     }private void showImageoriginal(BufferedImage img){
         ImageIcon icon = new ImageIcon(img);
+        //lblImagembkp.setSize(img.getWidth(), img.getHeight());
         lblImagembkp.setIcon(icon);
        
     }
@@ -762,7 +763,9 @@ public class Tela extends javax.swing.JFrame {
     private javax.swing.JToggleButton btEspelhar;
     private javax.swing.JButton btExercicio;
     private javax.swing.JMenu btHistograma;
+    private javax.swing.JMenuItem btReset;
     private javax.swing.JToggleButton btRotacao;
+    private javax.swing.JMenuItem btSalvar;
     private javax.swing.JToggleButton btTransladar;
     private javax.swing.JComboBox cboxDirecao;
     private javax.swing.JComboBox cboxExercicio;
@@ -785,11 +788,11 @@ public class Tela extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel jpanel0;
     private javax.swing.JLabel lblImagem;
     private javax.swing.JLabel lblImagembkp;
