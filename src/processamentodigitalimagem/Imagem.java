@@ -190,6 +190,7 @@ public class Imagem {
         Integer[][] matriz = new Integer[this.largura][this.altura];
         Raster rastro = this.imagem.getData();
         int px[] = new int[3];
+        this.matriz_temp = this.matriz_original;
         this.matriz_original = new Integer[this.largura][this.altura][px.length];
         for (int x = 0; x < this.largura; x++) {
             for (int y = 0; y < this.altura; y++) {
@@ -205,7 +206,7 @@ public class Imagem {
                 matriz[x][y] = (int) Math.round(red + green + blue);//seta as novas cores do pixel
             }
         }
-        matriz_bkp = matriz_temp;
+        //matriz_bkp = matriz_temp;
         this.matriz_temp = this.matriz_original;
         return matriz;
     }
@@ -298,11 +299,11 @@ public class Imagem {
         return matriz_original;
      }
     public Integer[][][] multiplicaMatriz(double xoffset,double yoffset,double zoom){
-        double minX = 0;
-        double minY = 0;
+        int minX = 0;
+        int minY = 0;
         int tempLargura=largura*(int)zoom;
         int tempAltura=altura*(int)zoom;
-        
+        int aux = (int)zoom;
         
         Integer[][][] matriz_retorno = new Integer[this.largura][this.altura][3];
         
@@ -316,10 +317,10 @@ public class Imagem {
                 newX = newX + xoffset;
                 newY = newY + yoffset;
                 if(newX < minX){
-                    minX = newX;
+                    minX = (int)newX;
                 }
                 if(newY < minY){
-                    minY = newY;
+                    minY = (int)newY;
                 }
                 if(newX < this.largura && newY < this.altura && newX >= 0 && newY >=0){
                     matriz_retorno[(int)newX][(int)newY] = px;
@@ -378,11 +379,11 @@ public class Imagem {
         this.setXYMatrizMult(1, 1, nivel);
         this.setXYMatrizMult(2, 2, 1);
         
-        for(int x=0;x<this.largura;x++){
-            for(int y=0;y<this.altura;y++){
-                matriz_original[x][y] = this.matriz_original[ x * (int)nivel][y* (int) nivel];
-            }    
-        }       
+//        for(int x=0;x<this.largura;x++){
+//            for(int y=0;y<this.altura;y++){
+//                matriz_original[x][y] = this.matriz_original[ x * (int)nivel][y* (int) nivel];
+//            }    
+//        }       
         return this.multiplicaMatriz(0,0,nivel);
     }
         

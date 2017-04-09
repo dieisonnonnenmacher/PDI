@@ -5,7 +5,7 @@
  */
 package processamentodigitalimagem;
 
-import com.sun.istack.internal.logging.Logger;
+//import com.sun.istack.internal.logging.Logger;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -91,7 +91,7 @@ public class Tela extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         sliderZoom = new javax.swing.JSlider();
-        jButton1 = new javax.swing.JButton();
+        btZoom = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         lblImagem = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -386,10 +386,10 @@ public class Tela extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Aplicar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btZoom.setText("Aplicar");
+        btZoom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btZoomActionPerformed(evt);
             }
         });
 
@@ -406,7 +406,7 @@ public class Tela extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btZoom)
                 .addGap(60, 60, 60))
         );
         jPanel7Layout.setVerticalGroup(
@@ -416,7 +416,7 @@ public class Tela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sliderZoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(btZoom)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -644,7 +644,7 @@ public class Tela extends javax.swing.JFrame {
 
     }//GEN-LAST:event_sliderZoomAncestorAdded
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btZoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btZoomActionPerformed
         // TODO add your handling code here:
         double zoom = 0;
         double aux = sliderZoom.getValue();
@@ -652,32 +652,32 @@ public class Tela extends javax.swing.JFrame {
         double largura;
         switch ((int)aux){
             case 1:
-                zoom =1.25;
+                zoom =1.1;
                
             break;
             case 2:
-                zoom =1.5;
+                zoom =1.2;
             break;  
             case -1:
-                zoom =0.75;
+                zoom =0.9;
             break;
             case -2:
-                zoom =0.5;
+                zoom =0.8;
             break;
             case 0:
                 zoom =1;
             break;    
             case 3:
-                zoom = 2;
+                zoom = 1.3;
                 break;
             case -3:
-                zoom = 0.25;
+                zoom = 0.7;
                 break;
             case 4:
-                zoom =2.25;
+                zoom =1.4;
             break;
             case -4:
-                zoom =0.1;
+                zoom =0.6;
             break; 
         }
         Integer matriz[][][] = this.imagemObj.getZoom(zoom);
@@ -685,7 +685,7 @@ public class Tela extends javax.swing.JFrame {
       //  System.out.println("Valor de Zoom " + aux );
         this.showImage(this.imagemObj.createImagemByMatriz(matriz));
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btZoomActionPerformed
 
     private void btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResetActionPerformed
         // TODO add your handling code here:
@@ -764,10 +764,10 @@ public class Tela extends javax.swing.JFrame {
     private javax.swing.JToggleButton btRotacao;
     private javax.swing.JMenuItem btSalvar;
     private javax.swing.JToggleButton btTransladar;
+    private javax.swing.JButton btZoom;
     private javax.swing.JComboBox cboxDirecao;
     private javax.swing.JComboBox cboxExercicio;
     private javax.swing.JComboBox cboxRotacao;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
