@@ -134,22 +134,24 @@ public class Tela extends javax.swing.JFrame {
         jpanel0Layout.setHorizontalGroup(
             jpanel0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpanel0Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
                 .addGroup(jpanel0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpanel0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtMediana, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(txtModa)
-                    .addComponent(txtVarianciaa)
-                    .addComponent(txtMedia))
-                .addGap(48, 48, 48))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanel0Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btCalcular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jpanel0Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jpanel0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpanel0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtMediana, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                            .addComponent(txtModa, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtVarianciaa, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMedia))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanel0Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btCalcular, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jpanel0Layout.setVerticalGroup(
@@ -570,8 +572,11 @@ public class Tela extends javax.swing.JFrame {
 
     private void btCinzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCinzaActionPerformed
         // TODO add your handling code here:
-        BufferedImage cinza = this.imagemObj.get_imagem_cinza();
-        this.showImage(cinza);
+        //BufferedImage cinza = this.imagemObj.get_imagem_cinza();
+        //this.showImage(cinza);     
+        Integer matriz[][][] = this.imagemObj.getMatrizCinza();
+        this.showImage(this.imagemObj.createImagemByMatriz(matriz));
+
 
     }//GEN-LAST:event_btCinzaActionPerformed
 

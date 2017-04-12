@@ -38,6 +38,7 @@ public class Imagem {
     private Integer[][][] matriz_original;
     private Integer[][][] matriz_temp = null;
     private Integer[][][] matriz_bkp = null;
+    private Integer[][][] matrizCinza;
     private double[][] matriz_multiplicacao = new double[3][3];
     
     public Imagem(){
@@ -72,26 +73,26 @@ public class Imagem {
             File f = new File(imagem_path);
             this.imagem = ImageIO.read(f);
             this.load_image_properties();
-            this.matriz_cinza = this.getMatrizCinza();
+            this.matriz_cinza = this.getMatrizCinzaCalc();
             return this.imagem;
             
         }
         return null;
     }
 
-    public BufferedImage get_imagem_cinza() {
-        BufferedImage img_cinza = new BufferedImage(this.largura, this.altura, BufferedImage.TYPE_BYTE_GRAY);
-        WritableRaster wRastro = img_cinza.getRaster();
-
-        for (int x = 0; x < this.largura; x++) {
-            for (int y = 0; y < this.altura; y++) {
-                int[] px = {this.matriz_cinza[x][y], this.matriz_cinza[x][y], this.matriz_cinza[x][y]};
-                wRastro.setPixel(x, y, px);
-            }
-        }
-        img_cinza.setData(wRastro);
-        return img_cinza;
-    }
+//    public BufferedImage get_imagem_cinza() {
+//        BufferedImage img_cinza = new BufferedImage(this.largura, this.altura, BufferedImage.TYPE_BYTE_GRAY);
+//        WritableRaster wRastro = img_cinza.getRaster();
+//
+//        for (int x = 0; x < this.largura; x++) {
+//            for (int y = 0; y < this.altura; y++) {
+//                int[] px = {this.matriz_cinza[x][y], this.matriz_cinza[x][y], this.matriz_cinza[x][y]};
+//                wRastro.setPixel(x, y, px);
+//            }
+//        }
+//        img_cinza.setData(wRastro);
+//        return img_cinza;
+//    }
      public BufferedImage getImagemExercicio(String selectedItem) {
           System.out.println(selectedItem);
         BufferedImage imgExercicio = new BufferedImage(this.largura, this.altura, BufferedImage.TYPE_INT_RGB);
@@ -185,12 +186,10 @@ public class Imagem {
         painel.setVisible(true);
         painel.add(pnlChart);
     }
-
-    public Integer[][] getMatrizCinza() {
+    public Integer[][] getMatrizCinzaCalc() {
         Integer[][] matriz = new Integer[this.largura][this.altura];
         Raster rastro = this.imagem.getData();
         int px[] = new int[3];
-        this.matriz_temp = this.matriz_original;
         this.matriz_original = new Integer[this.largura][this.altura][px.length];
         for (int x = 0; x < this.largura; x++) {
             for (int y = 0; y < this.altura; y++) {
@@ -200,14 +199,41 @@ public class Imagem {
                 this.matriz_original[x][y][0] = rastro.getSample(x, y, 0);
                 this.matriz_original[x][y][1] = rastro.getSample(x, y, 1);
                 this.matriz_original[x][y][2] = rastro.getSample(x, y, 2);
-                double red = px[0] * 0.3;//converte vermelho para tom cinza
-                double green = px[1] * 0.59;//converte verde para tom cinza
-                double blue = px[2] * 0.11;//converte azul para tom cinza
+                double red = px[0] * 0.5;//converte vermelho para tom cinza
+                double green = px[1] * 0.419;//converte verde para tom cinza
+                double blue = px[2] * 0.081;//converte azul para tom cinza
+//                double red = px[0] * 0.3;//converte vermelho para tom cinza
+//                double green = px[1] * 0.59;//converte verde para tom cinza
+//                double blue = px[2] * 0.11;//converte azul para tom cinza
                 matriz[x][y] = (int) Math.round(red + green + blue);//seta as novas cores do pixel
+
             }
         }
-        //matriz_bkp = matriz_temp;
+        return matriz;
+    }
+    public Integer[][][] getMatrizCinza() {
+        Integer[][][] matriz = new Integer[this.largura][this.altura][3];
+        Raster rastro = this.imagem.getData();
+        int px[] = new int[3];
+        this.matriz_original = new Integer[this.largura][this.altura][px.length];
+        for (int x = 0; x < this.largura; x++) {
+            for (int y = 0; y < this.altura; y++) {
+                for (int b = 0; b < px.length; b++) {
+                    px[b] = rastro.getSample(x, y, b);
+                }
+                this.matriz_original[x][y][0] = rastro.getSample(x, y, 0);
+                this.matriz_original[x][y][1] = rastro.getSample(x, y, 1);
+                this.matriz_original[x][y][2] = rastro.getSample(x, y, 2);
+                double red = px[0] * 0.2125;//converte vermelho para tom cinza
+                double green = px[1] * 0.7154;//converte verde para tom cinza
+                double blue = px[2] * 0.0721;//converte azul para tom cinza
+                matriz[x][y][0] = (int) Math.round(red + green + blue);//seta as novas cores do pixel
+                matriz[x][y][1]= (int) Math.round(red + green + blue);//seta as novas cores do pixel
+                matriz[x][y][2] = (int) Math.round(red + green + blue);//seta as novas cores do pixel
+            }
+        }
         this.matriz_temp = this.matriz_original;
+        matriz_original = matriz;
         return matriz;
     }
     
@@ -339,17 +365,12 @@ public class Imagem {
     
      public Integer[][][] getMatrizRotacao(int angulo){
         resetMatrizMult();
-        //double radianos = Math.toRadians(angulo);
-        //double seno = Math.sin(radianos);
-        double rad = (Math.PI/180) * angulo;
-	double seno = Math.sin(rad);
-        System.out.println(rad);
-        //double cosseno = Math.cos(radianos);
-	double cosseno = Math.cos(rad);
-        double senoNeg = seno *(-1);
-        System.out.println(senoNeg);
-        System.out.println(seno);
         
+        double rad = (Math.PI/180) * angulo;
+	double seno = (int) Math.sin(rad);
+	double cosseno = (int)Math.cos(rad);
+        double senoNeg = seno *(-1);
+
         setXYMatrizMult(0, 0, cosseno);
         setXYMatrizMult(0, 1, senoNeg);
         setXYMatrizMult(1, 0, seno);
@@ -399,27 +420,6 @@ public class Imagem {
         
         return this.multiplicaMatriz(0, 0,1);
     }
-//    public Integer[][][] getMultiplicaMatriz( Integer [][] matrizTipo ) {
-//        
-//        Raster rastro = this.imagem.getData();
-//       //int px[] = new int[3];
-//       // this.matriz_original = new Integer[this.largura][this.altura][px.length];
-//        for (int x = 0; x < this.largura; x++) {
-//            for (int y = 0; y < this.altura; y++) {
-//                Integer[] px = this.matriz_original[x][y];
-//                int newX = (int)Math.round((x*this.matriz_multiplicacao[0][0])+(y*this.matriz_multiplicacao[0][1])+(1*this.matriz_multiplicacao[0][2]));
-//                int newY = (int)Math.round((x*this.matriz_multiplicacao[1][0])+(y*this.matriz_multiplicacao[1][1])+(1*this.matriz_multiplicacao[1][2]));
-//                    px[] = rastro.getSample(x, y);
-//                    System.out.println(px);
-//                    px[] = px[b]*matrizTipo[x][y]; 
-//                    matriz_original[x][y] = px[];
-//                
-//          
-//            }
-//        }
-//        this.matriz_temp = this.matriz_original;
-//        return matriz_original;
-//    }
 
    
      
@@ -468,6 +468,7 @@ public class Imagem {
         matriz_temp = matriz_original;
         return matriz_temp;
     }
+
 
 
 
