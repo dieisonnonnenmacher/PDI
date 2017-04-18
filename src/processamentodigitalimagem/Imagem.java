@@ -468,9 +468,118 @@ public class Imagem {
         matriz_temp = matriz_original;
         return matriz_temp;
     }
+    //Ajustar metodo
+    Integer[][][] getExtracaoRuidos() {
+         
+        int fundo=0;
+        Integer[][][] matriz_retorno = new Integer[this.largura][this.altura][3];
+        Integer[][] matriz_estruturante = new Integer[3][3];
+        matriz_estruturante[0][0] = 1;
+	matriz_estruturante[1][0] = 1;
+	matriz_estruturante[2][0] = 1;
+	matriz_estruturante[0][1] = 1;
+	matriz_estruturante[1][1] = 1;
+	matriz_estruturante[2][1] = 1;
+	matriz_estruturante[0][2] = 1;
+	matriz_estruturante[1][2] = 1;
+	matriz_estruturante[2][2] = 1;
+	Integer[][][] matriz_aux = new Integer[this.largura][this.altura][3];
+		for(int x = 0;x<this.largura-1;x++){
+		    for(int y = 0;y<this.altura-1;y++){
+			Integer[] min = this.matriz_temp[x][y];
+		       	for(int m=0;m<3;m++){
+			   for(int i = 0;i<matriz_estruturante.length;i++){
+				if(x+i>=this.largura){
+				break;
+                                }
+				for(int j = 0; j<matriz_estruturante.length;j++){
+				    if(y+j>=this.altura){
+                                    break;
+                                    }
+                                    if(this.matriz_temp[x+i][y+j][m] != fundo && matriz_estruturante[i][j] != null){
+					if(fundo <=128){
+                                            min[m] = Math.min(min[m], this.matriz_temp[x+i][y+j][m]);
+					}else{
+                                           min[m] = Math.max(min[m], this.matriz_temp[x+i][y+j][m]);
+					}
+				    }
+				}
+			    }
+			    for(int i = 0;i<matriz_estruturante.length;i++){
+				if(x+i>=this.largura){
+                                   break;
+				}
+                                for(int j = 0; j<matriz_estruturante.length;j++){
+                                    if(y+j>=this.altura){
+                                       break;
+                                    }
+                                    if(matriz_estruturante[i][j] != null){
+					matriz_aux[x+i][y+j][m] = min[m]+matriz_estruturante[i][j];
+                                    }
+                        	}
+                            }
+                        }
+		   }
+		}
+			
+	return this.matriz_temp;
 
+    }
 
+    Integer[][][] getBrilho(int brilho) {
+         int a = 1;
+         int b = brilho;
+       Integer[][][] matriz_retorno = new Integer[this.largura][this.altura][3]; 
+        for(int x=0;x<this.largura;x++){
+            for(int y=0;y<this.altura;y++){
+                Integer[] px = this.matriz_original[x][y];
+               /// System.out.println(px);
+                Integer[] aux = new Integer[3];    
+                    for(int j=0;j<3;j++){
+                  //      System.out.println(px[j]);
+                        aux[j] = (a * px[j] )+b;
+                        if(aux[j] > 255){
+                            aux[j] = 255;
+                        }
+                        if(aux[j] < 0){
+                            aux[j] = 0;
+                        }
+                    //     System.out.println(px[j]);
+                    }
+                matriz_retorno [x][y] = aux;
+            }
+        }
+        
+     matriz_original = matriz_retorno;
+     return matriz_retorno;
 
+    }
 
-   
-}
+    Integer[][][] getContraste(int contraste) {
+       int a = contraste;
+       int b = 0;
+       Integer[][][] matriz_retorno = new Integer[this.largura][this.altura][3]; 
+        for(int x=0;x<this.largura;x++){
+            for(int y=0;y<this.altura;y++){
+                Integer[] px = this.matriz_original[x][y];
+               /// System.out.println(px);
+                Integer[] aux = new Integer[3];    
+                    for(int j=0;j<3;j++){
+                  //      System.out.println(px[j]);
+                        aux[j] = (a * px[j] )+b;
+                        if(aux[j] > 255){
+                            aux[j] = 255;
+                        }
+                        if(aux[j] < 0){
+                            aux[j] = 0;
+                        }
+                    //     System.out.println(px[j]);
+                    }
+                matriz_retorno [x][y] = aux;
+            }
+        }
+        
+     matriz_original = matriz_retorno;
+     return matriz_retorno;
+    }
+}    
