@@ -211,6 +211,7 @@ public class Imagem {
         }
         return matriz;
     }
+    //Tratar os valores Brancos
     public Integer[][][] getMatrizCinza() {
         Integer[][][] matriz = new Integer[this.largura][this.altura][3];
         Integer px[] = new Integer[3];
@@ -218,7 +219,7 @@ public class Imagem {
         for (int x = 0; x < this.largura; x++) {
             for (int y = 0; y < this.altura; y++) {
                    px = this.matriz_original[x][y];
-                
+
                 
                 double red = px[0] * 0.2125;//converte vermelho para tom cinza
                 double green = px[1] * 0.7154;//converte verde para tom cinza
