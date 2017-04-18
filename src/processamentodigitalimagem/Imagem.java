@@ -213,17 +213,13 @@ public class Imagem {
     }
     public Integer[][][] getMatrizCinza() {
         Integer[][][] matriz = new Integer[this.largura][this.altura][3];
-        Raster rastro = this.imagem.getData();
-        int px[] = new int[3];
-        this.matriz_original = new Integer[this.largura][this.altura][px.length];
+        Integer px[] = new Integer[3];
+        //this.matriz_original = new Integer[this.largura][this.altura][px.length];
         for (int x = 0; x < this.largura; x++) {
             for (int y = 0; y < this.altura; y++) {
-                for (int b = 0; b < px.length; b++) {
-                    px[b] = rastro.getSample(x, y, b);
-                }
-                this.matriz_original[x][y][0] = rastro.getSample(x, y, 0);
-                this.matriz_original[x][y][1] = rastro.getSample(x, y, 1);
-                this.matriz_original[x][y][2] = rastro.getSample(x, y, 2);
+                   px = this.matriz_original[x][y];
+                
+                
                 double red = px[0] * 0.2125;//converte vermelho para tom cinza
                 double green = px[1] * 0.7154;//converte verde para tom cinza
                 double blue = px[2] * 0.0721;//converte azul para tom cinza
@@ -232,11 +228,38 @@ public class Imagem {
                 matriz[x][y][2] = (int) Math.round(red + green + blue);//seta as novas cores do pixel
             }
         }
+        
         this.matriz_temp = this.matriz_original;
         matriz_original = matriz;
         return matriz;
     }
     
+//    public Integer[][][] getMatrizCinza() {
+//        Integer[][][] matriz = new Integer[this.largura][this.altura][3];
+//        Raster rastro = this.imagem.getData();
+//        int px[] = new int[3];
+//        this.matriz_original = new Integer[this.largura][this.altura][px.length];
+//        for (int x = 0; x < this.largura; x++) {
+//            for (int y = 0; y < this.altura; y++) {
+//                for (int b = 0; b < px.length; b++) {
+//                    px[b] = rastro.getSample(x, y, b);
+//                }
+//                this.matriz_original[x][y][0] = rastro.getSample(x, y, 0);
+//                this.matriz_original[x][y][1] = rastro.getSample(x, y, 1);
+//                this.matriz_original[x][y][2] = rastro.getSample(x, y, 2);
+//                double red = px[0] * 0.2125;//converte vermelho para tom cinza
+//                double green = px[1] * 0.7154;//converte verde para tom cinza
+//                double blue = px[2] * 0.0721;//converte azul para tom cinza
+//                matriz[x][y][0] = (int) Math.round(red + green + blue);//seta as novas cores do pixel
+//                matriz[x][y][1]= (int) Math.round(red + green + blue);//seta as novas cores do pixel
+//                matriz[x][y][2] = (int) Math.round(red + green + blue);//seta as novas cores do pixel
+//            }
+//        }
+//        this.matriz_temp = this.matriz_original;
+//        matriz_original = matriz;
+//        return matriz;
+//    }
+//    
     public String getMedia( ){
         double media = 0;
         String aux;
@@ -376,8 +399,9 @@ public class Imagem {
         setXYMatrizMult(1, 0, seno);
         setXYMatrizMult(1, 1, cosseno);
         setXYMatrizMult(2, 2, 1);
-
-        return this.multiplicaMatriz(0,0,1);
+        
+        matriz_original = this.multiplicaMatriz(0,0,1);
+        return matriz_original;
     }
     
         public Integer[][][] getMatrizEspelhamento(int direcao){
@@ -391,8 +415,8 @@ public class Imagem {
             this.setXYMatrizMult(1, 1, -1);
             this.setXYMatrizMult(2, 2, 1);
         }
-        
-        return this.multiplicaMatriz(0, 0,1);
+        matriz_original = this.multiplicaMatriz(0, 0,1);
+        return matriz_original;
     }
         public Integer[][][] getZoom(double nivel){
         this.resetMatrizMult();
@@ -405,7 +429,8 @@ public class Imagem {
 //                matriz_original[x][y] = this.matriz_original[ x * (int)nivel][y* (int) nivel];
 //            }    
 //        }       
-        return this.multiplicaMatriz(0,0,nivel);
+        matriz_original = this.multiplicaMatriz(0,0,nivel); 
+        return matriz_original;
     }
         
         
@@ -418,7 +443,10 @@ public class Imagem {
         this.setXYMatrizMult(1, 1, 1);
         this.setXYMatrizMult(2, 2, 1);
         
+        //matriz_temp = matriz_original;
+        matriz_original = this.multiplicaMatriz(0, 0,1);
         return this.multiplicaMatriz(0, 0,1);
+        
     }
 
    
@@ -472,49 +500,49 @@ public class Imagem {
     Integer[][][] getExtracaoRuidos() {
          
         int fundo=0;
-        Integer[][][] matriz_retorno = new Integer[this.largura][this.altura][3];
-        Integer[][] matriz_estruturante = new Integer[3][3];
-        matriz_estruturante[0][0] = 1;
-	matriz_estruturante[1][0] = 1;
-	matriz_estruturante[2][0] = 1;
-	matriz_estruturante[0][1] = 1;
-	matriz_estruturante[1][1] = 1;
-	matriz_estruturante[2][1] = 1;
-	matriz_estruturante[0][2] = 1;
-	matriz_estruturante[1][2] = 1;
-	matriz_estruturante[2][2] = 1;
-	Integer[][][] matriz_aux = new Integer[this.largura][this.altura][3];
+        Integer[][][] matrizRetorno = new Integer[this.largura][this.altura][3];
+        Integer[][] matriz = new Integer[3][3];
+        matriz[0][0] = 1;
+	matriz[1][0] = 2;
+	matriz[2][0] = 1;
+	matriz[0][1] = 2;
+	matriz[1][1] = 4;
+	matriz[2][1] = 2;
+	matriz[0][2] = 1;
+	matriz[1][2] = 2;
+	matriz[2][2] = 1;
+	Integer[][][] matrizAux = new Integer[this.largura][this.altura][3];
 		for(int x = 0;x<this.largura-1;x++){
 		    for(int y = 0;y<this.altura-1;y++){
-			Integer[] min = this.matriz_temp[x][y];
+			Integer[] min = this.matriz_original[x][y];
 		       	for(int m=0;m<3;m++){
-			   for(int i = 0;i<matriz_estruturante.length;i++){
+			   for(int i = 0;i<matriz.length;i++){
 				if(x+i>=this.largura){
 				break;
                                 }
-				for(int j = 0; j<matriz_estruturante.length;j++){
+				for(int j = 0; j<matriz.length;j++){
 				    if(y+j>=this.altura){
                                     break;
                                     }
-                                    if(this.matriz_temp[x+i][y+j][m] != fundo && matriz_estruturante[i][j] != null){
+                                    if(this.matriz_original[x+i][y+j][m] != fundo && matriz[i][j] != null){
 					if(fundo <=128){
-                                            min[m] = Math.min(min[m], this.matriz_temp[x+i][y+j][m]);
+                                            min[m] = Math.min(min[m], this.matriz_original[x+i][y+j][m]);
 					}else{
                                            min[m] = Math.max(min[m], this.matriz_temp[x+i][y+j][m]);
 					}
 				    }
 				}
 			    }
-			    for(int i = 0;i<matriz_estruturante.length;i++){
+			    for(int i = 0;i<matriz.length;i++){
 				if(x+i>=this.largura){
                                    break;
 				}
-                                for(int j = 0; j<matriz_estruturante.length;j++){
+                                for(int j = 0; j<matriz.length;j++){
                                     if(y+j>=this.altura){
                                        break;
                                     }
-                                    if(matriz_estruturante[i][j] != null){
-					matriz_aux[x+i][y+j][m] = min[m]+matriz_estruturante[i][j];
+                                    if(matriz[i][j] != null){
+					matrizAux[x+i][y+j][m] = min[m]+matriz[i][j];
                                     }
                         	}
                             }
@@ -522,7 +550,7 @@ public class Imagem {
 		   }
 		}
 			
-	return this.matriz_temp;
+	return this.matriz_original;
 
     }
 
@@ -549,7 +577,7 @@ public class Imagem {
                 matriz_retorno [x][y] = aux;
             }
         }
-        
+     //matriz_temp = matriz_original;  
      matriz_original = matriz_retorno;
      return matriz_retorno;
 
@@ -578,7 +606,7 @@ public class Imagem {
                 matriz_retorno [x][y] = aux;
             }
         }
-        
+     //matriz_temp = matriz_original;
      matriz_original = matriz_retorno;
      return matriz_retorno;
     }
