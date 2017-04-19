@@ -797,7 +797,7 @@ public class Tela extends javax.swing.JFrame {
     }//GEN-LAST:event_btContrasteMaisActionPerformed
 
     private void btContrasteMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContrasteMenosActionPerformed
-        int contraste = -50;
+        double contraste = 0.5;
         Integer matriz[][][] = this.imagemObj.getContraste(contraste);
         this.showImage(this.imagemObj.createImagemByMatriz(matriz));
     }//GEN-LAST:event_btContrasteMenosActionPerformed

@@ -224,9 +224,12 @@ public class Imagem {
                 double red = px[0] * 0.2125;//converte vermelho para tom cinza
                 double green = px[1] * 0.7154;//converte verde para tom cinza
                 double blue = px[2] * 0.0721;//converte azul para tom cinza
-                matriz[x][y][0] = (int) Math.round(red + green + blue);//seta as novas cores do pixel
-                matriz[x][y][1]= (int) Math.round(red + green + blue);//seta as novas cores do pixel
-                matriz[x][y][2] = (int) Math.round(red + green + blue);//seta as novas cores do pixel
+                matriz[x][y][0] = (int) (red + green + blue);//seta as novas cores do pixel
+                matriz[x][y][1]= (int) (red + green + blue);//seta as novas cores do pixel
+                matriz[x][y][2] = (int)(red + green + blue);//seta as novas cores do pixel
+//                matriz[x][y][0] = (int) Math.round(red + green + blue);//seta as novas cores do pixel
+//                matriz[x][y][1]= (int) Math.round(red + green + blue);//seta as novas cores do pixel
+//                matriz[x][y][2] = (int) Math.round(red + green + blue);//seta as novas cores do pixel
             }
         }
         
@@ -584,8 +587,8 @@ public class Imagem {
 
     }
 
-    Integer[][][] getContraste(int contraste) {
-       int a = contraste;
+    Integer[][][] getContraste(double contraste) {
+       double a = contraste;
        int b = 0;
        Integer[][][] matriz_retorno = new Integer[this.largura][this.altura][3]; 
         for(int x=0;x<this.largura;x++){
@@ -595,7 +598,7 @@ public class Imagem {
                 Integer[] aux = new Integer[3];    
                     for(int j=0;j<3;j++){
                   //      System.out.println(px[j]);
-                        aux[j] = (a * px[j] )+b;
+                        aux[j] = (int)(a * px[j] )+b;
                         if(aux[j] > 255){
                             aux[j] = 255;
                         }
