@@ -40,6 +40,7 @@ public class Imagem {
     private Integer[][][] matriz_bkp = null;
     private Integer[][][] matrizCinza;
     private double[][] matriz_multiplicacao = new double[3][3];
+    private Integer[][] matriz_kernel = new Integer[3][3];
     
     public Imagem(){
         this.resetMatrizMult();
@@ -614,4 +615,43 @@ public class Imagem {
      matriz_original = matriz_retorno;
      return matriz_retorno;
     }
+    
+    public void setKernel(int P1,int P2,int P3,int P4,int P5,int P6,int P7,int P8,int P9){
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                matriz_kernel[i][j]=0;
+            }
+        }
+        matriz_kernel[0][0] = P1;
+        matriz_kernel[0][1] = P2;
+        matriz_kernel[0][2] = P3;        
+        matriz_kernel[1][0] = P4;
+        matriz_kernel[1][1] = P5;
+        matriz_kernel[1][2] = P6;        
+        matriz_kernel[2][0] = P7;
+        matriz_kernel[2][1] = P8;
+        matriz_kernel[2][2] = P9;
+    }
+    
+    Integer[][][] getGauss() {        
+        getMatrizCinza();
+        double somatorio = 0;
+        setKernel(1, 2, 1, 2, 4, 2, 1, 2, 1);
+        for (int x = 2; x < this.largura-2; x++) {
+            for (int y = 2; y < this.altura-2; y++) {
+                somatorio = 0;
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        somatorio += matriz_original[x + (j-1)][y+(i-1)][0] * matriz_kernel[i][j];
+                    }
+                }
+                
+                for (int k = 0; k<3;k++){
+                     this.matriz_original[x][y][k] = (int)somatorio / 16;
+                }
+            }        
+        }
+        return this.matriz_original;
+    }
+    
 }    

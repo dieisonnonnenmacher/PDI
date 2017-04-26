@@ -115,12 +115,13 @@ public class Tela extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         btRuidos = new javax.swing.JMenuItem();
         btBordas = new javax.swing.JMenuItem();
+        btGauss = new javax.swing.JMenuItem();
 
         jLabel5.setText("jLabel5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Editor de Imagem PDI");
-        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImages(null);
         setPreferredSize(new java.awt.Dimension(1100, 800));
 
@@ -570,6 +571,14 @@ public class Tela extends javax.swing.JFrame {
         });
         jMenu3.add(btBordas);
 
+        btGauss.setText("Gaussiano");
+        btGauss.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGaussActionPerformed(evt);
+            }
+        });
+        jMenu3.add(btGauss);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -809,9 +818,14 @@ public class Tela extends javax.swing.JFrame {
 
     private void btBordasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBordasActionPerformed
         // TODO add your handling code here:
-        Integer matriz[][][] = this.imagemObj.getBordas(30);
-        this.showImage(this.imagemObj.createImagemByMatriz(matriz));
+//        Integer matriz[][][] = this.imagemObj.getBordas(30);
+//        this.showImage(this.imagemObj.createImagemByMatriz(matriz));
     }//GEN-LAST:event_btBordasActionPerformed
+
+    private void btGaussActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGaussActionPerformed
+         Integer matriz[][][] = this.imagemObj.getGauss();
+         this.showImage(this.imagemObj.createImagemByMatriz(matriz));
+    }//GEN-LAST:event_btGaussActionPerformed
 
     public static File getApplicationImagesPath(){
        File folder = new File("./imagens/");
@@ -876,6 +890,7 @@ public class Tela extends javax.swing.JFrame {
     private javax.swing.JMenu btEdit;
     private javax.swing.JToggleButton btEspelhar;
     private javax.swing.JButton btExercicio;
+    private javax.swing.JMenuItem btGauss;
     private javax.swing.JMenu btHistograma;
     private javax.swing.JMenuItem btReset;
     private javax.swing.JToggleButton btRotacao;
