@@ -825,6 +825,7 @@ public class Tela extends javax.swing.JFrame {
     private void btGaussActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGaussActionPerformed
          Integer matriz[][][] = this.imagemObj.getGauss();
          this.showImage(this.imagemObj.createImagemByMatriz(matriz));
+         
     }//GEN-LAST:event_btGaussActionPerformed
 
     public static File getApplicationImagesPath(){
