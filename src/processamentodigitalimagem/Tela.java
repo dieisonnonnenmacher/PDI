@@ -101,21 +101,20 @@ public class Tela extends javax.swing.JFrame {
         bAbrirImagem = new javax.swing.JMenuItem();
         btSalvar = new javax.swing.JMenuItem();
         btEdit = new javax.swing.JMenu();
-        btHistograma = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        btFuncoes = new javax.swing.JMenu();
+        btHistograma = new javax.swing.JMenuItem();
         btReset = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        btBrilho = new javax.swing.JMenu();
         btBrilhoMais = new javax.swing.JMenuItem();
         btBrilhoMenos = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        btContraste = new javax.swing.JMenu();
         btContrasteMais = new javax.swing.JMenuItem();
         btContrasteMenos = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        btTonsCinza = new javax.swing.JMenu();
         btCinza = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        btFiltros = new javax.swing.JMenu();
         btRuidos = new javax.swing.JMenuItem();
         btBordas = new javax.swing.JMenuItem();
-        btGauss = new javax.swing.JMenuItem();
 
         jLabel5.setText("jLabel5");
 
@@ -481,15 +480,15 @@ public class Tela extends javax.swing.JFrame {
         });
         jMenuBar1.add(btEdit);
 
-        btHistograma.setText("Funções");
+        btFuncoes.setText("Funções");
 
-        jMenuItem1.setText("Gerar Histograma");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        btHistograma.setText("Gerar Histograma");
+        btHistograma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                btHistogramaActionPerformed(evt);
             }
         });
-        btHistograma.add(jMenuItem1);
+        btFuncoes.add(btHistograma);
 
         btReset.setText("Restaurar Matriz");
         btReset.addActionListener(new java.awt.event.ActionListener() {
@@ -497,9 +496,9 @@ public class Tela extends javax.swing.JFrame {
                 btResetActionPerformed(evt);
             }
         });
-        btHistograma.add(btReset);
+        btFuncoes.add(btReset);
 
-        jMenu4.setText("Brilho");
+        btBrilho.setText("Brilho");
 
         btBrilhoMais.setText("Brilho +");
         btBrilhoMais.addActionListener(new java.awt.event.ActionListener() {
@@ -507,7 +506,7 @@ public class Tela extends javax.swing.JFrame {
                 btBrilhoMaisActionPerformed(evt);
             }
         });
-        jMenu4.add(btBrilhoMais);
+        btBrilho.add(btBrilhoMais);
 
         btBrilhoMenos.setText("Brilho -");
         btBrilhoMenos.addActionListener(new java.awt.event.ActionListener() {
@@ -515,11 +514,11 @@ public class Tela extends javax.swing.JFrame {
                 btBrilhoMenosActionPerformed(evt);
             }
         });
-        jMenu4.add(btBrilhoMenos);
+        btBrilho.add(btBrilhoMenos);
 
-        btHistograma.add(jMenu4);
+        btFuncoes.add(btBrilho);
 
-        jMenu5.setText("Contraste");
+        btContraste.setText("Contraste");
 
         btContrasteMais.setText("Contraste +");
         btContrasteMais.addActionListener(new java.awt.event.ActionListener() {
@@ -527,7 +526,7 @@ public class Tela extends javax.swing.JFrame {
                 btContrasteMaisActionPerformed(evt);
             }
         });
-        jMenu5.add(btContrasteMais);
+        btContraste.add(btContrasteMais);
 
         btContrasteMenos.setText("Contraste -");
         btContrasteMenos.addActionListener(new java.awt.event.ActionListener() {
@@ -535,13 +534,13 @@ public class Tela extends javax.swing.JFrame {
                 btContrasteMenosActionPerformed(evt);
             }
         });
-        jMenu5.add(btContrasteMenos);
+        btContraste.add(btContrasteMenos);
 
-        btHistograma.add(jMenu5);
+        btFuncoes.add(btContraste);
 
-        jMenuBar1.add(btHistograma);
+        jMenuBar1.add(btFuncoes);
 
-        jMenu2.setText("Tonalidades de Cinza");
+        btTonsCinza.setText("Tonalidades de Cinza");
 
         btCinza.setText("Tonalidade Cinza -1");
         btCinza.addActionListener(new java.awt.event.ActionListener() {
@@ -549,11 +548,11 @@ public class Tela extends javax.swing.JFrame {
                 btCinzaActionPerformed(evt);
             }
         });
-        jMenu2.add(btCinza);
+        btTonsCinza.add(btCinza);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(btTonsCinza);
 
-        jMenu3.setText("Filtros");
+        btFiltros.setText("Filtros");
 
         btRuidos.setText("Extração de Ruídos");
         btRuidos.addActionListener(new java.awt.event.ActionListener() {
@@ -561,7 +560,7 @@ public class Tela extends javax.swing.JFrame {
                 btRuidosActionPerformed(evt);
             }
         });
-        jMenu3.add(btRuidos);
+        btFiltros.add(btRuidos);
 
         btBordas.setText("Detecção de Bordas");
         btBordas.addActionListener(new java.awt.event.ActionListener() {
@@ -569,17 +568,9 @@ public class Tela extends javax.swing.JFrame {
                 btBordasActionPerformed(evt);
             }
         });
-        jMenu3.add(btBordas);
+        btFiltros.add(btBordas);
 
-        btGauss.setText("Gaussiano");
-        btGauss.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btGaussActionPerformed(evt);
-            }
-        });
-        jMenu3.add(btGauss);
-
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(btFiltros);
 
         setJMenuBar(jMenuBar1);
 
@@ -629,8 +620,7 @@ public class Tela extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bAbrirImagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAbrirImagemActionPerformed
-        // TODO add your handling code here:
-                 try {
+        try {
             BufferedImage img = this.imagemObj.find_imagem();
             
             if(img != null){
@@ -639,9 +629,7 @@ public class Tela extends javax.swing.JFrame {
             }
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(Tela.class.getName()).log(Level.SEVERE, null, ex);
-        }
-   //}                                      
-
+        }                                    
     }//GEN-LAST:event_bAbrirImagemActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
@@ -653,13 +641,12 @@ public class Tela extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btEditActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+    private void btHistogramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHistogramaActionPerformed
+
         this.imagemObj.gera_histograma();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_btHistogramaActionPerformed
 
     private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
-        // TODO add your handling code here:
         txtMediana.setText(this.imagemObj.getMediana());
         txtMedia.setText(this.imagemObj.getMedia());
         txtModa.setText(this.imagemObj.getModa());
@@ -667,9 +654,7 @@ public class Tela extends javax.swing.JFrame {
     }//GEN-LAST:event_btCalcularActionPerformed
 
     private void btExercicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExercicioActionPerformed
-        // TODO add your handling code here:
         String teste = cboxExercicio.getSelectedItem().toString();
-        //System.out.println(teste);
         BufferedImage imgNova = this.imagemObj.getImagemExercicio(teste);
         this.showImage(imgNova);
     }//GEN-LAST:event_btExercicioActionPerformed
@@ -679,12 +664,10 @@ public class Tela extends javax.swing.JFrame {
     }//GEN-LAST:event_cboxExercicioActionPerformed
 
     private void btTransladarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTransladarActionPerformed
-        // TODO add your handling code here:
         int x = Integer.parseInt(txtTransladarX.getText().trim());
         int y = Integer.parseInt(txtTransladarY.getText().trim());
 
         if((x >= 0) && (y >= 0)){
-
             Integer matriz[][][] = this.imagemObj.getMatrizTranslacao(x,y); 
             this.showImage(this.imagemObj.createImagemByMatriz(matriz));
         }else{
@@ -693,15 +676,11 @@ public class Tela extends javax.swing.JFrame {
     }//GEN-LAST:event_btTransladarActionPerformed
 
     private void btEspelharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEspelharActionPerformed
-        // TODO add your handling code here:
-        
         Integer matriz[][][] = this.imagemObj.getMatrizEspelhamento(cboxDirecao.getSelectedIndex());
         this.showImage(this.imagemObj.createImagemByMatriz(matriz));    
-        
     }//GEN-LAST:event_btEspelharActionPerformed
 
     private void btRotacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRotacaoActionPerformed
-        // TODO add your handling code here:
         int graus = 0;
         if (cboxRotacao.getSelectedIndex() == 0){
             graus = 90;
@@ -714,16 +693,13 @@ public class Tela extends javax.swing.JFrame {
 
     private void sliderZoomAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_sliderZoomAncestorMoved
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_sliderZoomAncestorMoved
 
     private void sliderZoomAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_sliderZoomAncestorAdded
         // TODO add your handling code here:
-
     }//GEN-LAST:event_sliderZoomAncestorAdded
 
     private void btZoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btZoomActionPerformed
-        // TODO add your handling code here:
         double zoom = 0;
         double aux = sliderZoom.getValue();
         double altura;
@@ -766,28 +742,25 @@ public class Tela extends javax.swing.JFrame {
     }//GEN-LAST:event_btZoomActionPerformed
 
     private void btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResetActionPerformed
-        // TODO add your handling code here:
         Integer matriz[][][] = this.imagemObj.resetMatriz();
         this.showImage(this.imagemObj.createImagemByMatriz(matriz));
-        
     }//GEN-LAST:event_btResetActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        // TODO add your handling code here:
         Integer matriz[][][] = this.imagemObj.getSalvar();
         this.showImageoriginal(this.imagemObj.createImagemByMatriz(matriz));
        
     }//GEN-LAST:event_btSalvarActionPerformed
 
     private void btCinzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCinzaActionPerformed
-        // TODO add your handling code here:
         Integer matriz[][][] = this.imagemObj.getMatrizCinza();
         this.showImage(this.imagemObj.createImagemByMatriz(matriz));
     }//GEN-LAST:event_btCinzaActionPerformed
 
     private void btRuidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRuidosActionPerformed
-        // TODO add your handling code here:
-        Integer matriz[][][] = this.imagemObj.getExtracaoRuidos();
+//        Integer matriz[][][] = this.imagemObj.getExtracaoRuidos();
+//        this.showImage(this.imagemObj.createImagemByMatriz(matriz));
+        Integer matriz[][][] = this.imagemObj.getGauss();
         this.showImage(this.imagemObj.createImagemByMatriz(matriz));
         
     }//GEN-LAST:event_btRuidosActionPerformed
@@ -817,16 +790,9 @@ public class Tela extends javax.swing.JFrame {
     }//GEN-LAST:event_btContrasteMenosActionPerformed
 
     private void btBordasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBordasActionPerformed
-        // TODO add your handling code here:
-//        Integer matriz[][][] = this.imagemObj.getBordas(30);
-//        this.showImage(this.imagemObj.createImagemByMatriz(matriz));
+        Integer matriz[][][] = this.imagemObj.getBordas(30);
+        this.showImage(this.imagemObj.createImagemByMatriz(matriz));
     }//GEN-LAST:event_btBordasActionPerformed
-
-    private void btGaussActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGaussActionPerformed
-         Integer matriz[][][] = this.imagemObj.getGauss();
-         this.showImage(this.imagemObj.createImagemByMatriz(matriz));
-         
-    }//GEN-LAST:event_btGaussActionPerformed
 
     public static File getApplicationImagesPath(){
        File folder = new File("./imagens/");
@@ -834,15 +800,15 @@ public class Tela extends javax.swing.JFrame {
      }
     private void showImage(BufferedImage img){
         ImageIcon icon = new ImageIcon(img);
-        //lblImagem.setSize(img.getWidth(), img.getHeight());
-            
-        lblImagem.setIcon(icon);
-       
-    }private void showImageoriginal(BufferedImage img){
+        //lblImagem.setSize(img.getWidth(), img.getHeight());            
+        lblImagem.setIcon(icon);       
+    }
+    
+    private void showImageoriginal(BufferedImage img){
         ImageIcon icon = new ImageIcon(img);
         //lblImagembkp.setSize(img.getWidth(), img.getHeight());
         lblImagembkp.setIcon(icon);
-       
+        lblImagem.setIcon(icon);       
     }
     /**
      * @param args the command line arguments
@@ -882,21 +848,25 @@ public class Tela extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem bAbrirImagem;
     private javax.swing.JMenuItem btBordas;
+    private javax.swing.JMenu btBrilho;
     private javax.swing.JMenuItem btBrilhoMais;
     private javax.swing.JMenuItem btBrilhoMenos;
     private javax.swing.JButton btCalcular;
     private javax.swing.JMenuItem btCinza;
+    private javax.swing.JMenu btContraste;
     private javax.swing.JMenuItem btContrasteMais;
     private javax.swing.JMenuItem btContrasteMenos;
     private javax.swing.JMenu btEdit;
     private javax.swing.JToggleButton btEspelhar;
     private javax.swing.JButton btExercicio;
-    private javax.swing.JMenuItem btGauss;
-    private javax.swing.JMenu btHistograma;
+    private javax.swing.JMenu btFiltros;
+    private javax.swing.JMenu btFuncoes;
+    private javax.swing.JMenuItem btHistograma;
     private javax.swing.JMenuItem btReset;
     private javax.swing.JToggleButton btRotacao;
     private javax.swing.JMenuItem btRuidos;
     private javax.swing.JMenuItem btSalvar;
+    private javax.swing.JMenu btTonsCinza;
     private javax.swing.JToggleButton btTransladar;
     private javax.swing.JButton btZoom;
     private javax.swing.JComboBox cboxDirecao;
@@ -915,12 +885,7 @@ public class Tela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;

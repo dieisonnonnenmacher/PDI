@@ -352,44 +352,55 @@ public class Imagem {
         matriz_original = matriz_temp;
         return matriz_original;
      }
-    public Integer[][][] multiplicaMatriz(double xoffset,double yoffset,double zoom){
+public Integer[][][] multiplicaMatriz(double xoffset,double yoffset,double zoom){
         int minX = 0;
         int minY = 0;
-        int tempLargura=largura*(int)zoom;
-        int tempAltura=altura*(int)zoom;
-        int aux = (int)zoom;
-        
-        Integer[][][] matriz_retorno = new Integer[this.largura][this.altura][3];
-        
+        double tempLargura=largura * zoom;
+        double tempAltura=altura * zoom;
+        int aux = (int)zoom;       
+        Integer[][][] matriz_retorno = new Integer[(int)tempLargura][(int)tempAltura][3];
+
         for(int x=0;x<this.largura;x++){
             for(int y=0;y<this.altura;y++){
                 Integer[] px = this.matriz_original[x][y];
-                //Integer[] px = this.matriz_temp[x][y];
+
                 double newX = ((x*this.matriz_multiplicacao[0][0])+(y*this.matriz_multiplicacao[0][1])+(1*this.matriz_multiplicacao[0][2]));
                 double newY = ((x*this.matriz_multiplicacao[1][0])+(y*this.matriz_multiplicacao[1][1])+(1*this.matriz_multiplicacao[1][2]));
-           
+
                 newX = newX + xoffset;
                 newY = newY + yoffset;
+
                 if(newX < minX){
                     minX = (int)newX;
                 }
+
                 if(newY < minY){
                     minY = (int)newY;
                 }
+
                 if(newX < this.largura && newY < this.altura && newX >= 0 && newY >=0){
-                    matriz_retorno[(int)newX][(int)newY] = px;
+                    double nx = newX*zoom;
+                    double ny = newY*zoom;
+
+                    matriz_retorno[(int)nx][(int)ny] = px;
                 }
             }
         }
+        
         xoffset = minX * -1;
         yoffset = minY * -1;
+
         if(xoffset != 0 || yoffset != 0){
             matriz_retorno = multiplicaMatriz(xoffset, yoffset,zoom);//a posição inicial precisa ser 0
         }
+
         matriz_original = matriz_retorno;
+
        // this.matriz_cinza = getMatrizCinza();
+
         return matriz_retorno;
     }
+
     
      public Integer[][][] getMatrizRotacao(int angulo){
         resetMatrizMult();
@@ -653,5 +664,38 @@ public class Imagem {
         }
         return this.matriz_original;
     }
+    
+    
+    public Integer[][][] getBordas(int threshold) {
+        Integer[][][] matriz = new Integer[this.largura][this.altura][3];
+        int cor, tmp, gY, gX;
+
+        for (int y = 0; y < this.altura - 1; y++) {
+            for (int x = 0; x < this.largura - 1; x++) {
+                Integer px1[] = this.matriz_original[x + 1][y + 1];
+                Integer px2[] = this.matriz_original[x][y];
+                Integer px3[] = this.matriz_original[x + 1][y];
+                Integer px4[] = this.matriz_original[x][y + 1];
+
+                gY = (int) Math.pow(px1[0] - px2[0], 2);
+                gX = (int) Math.pow(px3[0] - px4[0], 2);
+
+                tmp = (int) Math.sqrt(gY + gX);
+                cor = 0;
+
+                if (tmp > threshold) {
+                    cor = 255;
+                }
+
+                matriz[x][y][0] = cor;
+                matriz[x][y][1] = cor;
+                matriz[x][y][2] = cor;
+            }
+        }
+
+        matriz_original = matriz;
+        return matriz;
+    }
+
     
 }    
