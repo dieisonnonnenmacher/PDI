@@ -114,7 +114,11 @@ public class Tela extends javax.swing.JFrame {
         btCinza = new javax.swing.JMenuItem();
         btFiltros = new javax.swing.JMenu();
         btRuidos = new javax.swing.JMenuItem();
-        btBordas = new javax.swing.JMenuItem();
+        btBordas = new javax.swing.JMenu();
+        btBordasSobel = new javax.swing.JMenuItem();
+        btBordasRoberts = new javax.swing.JMenuItem();
+        btBordasRobinson = new javax.swing.JMenuItem();
+        btBordasKirsch = new javax.swing.JMenuItem();
 
         jLabel5.setText("jLabel5");
 
@@ -387,13 +391,13 @@ public class Tela extends javax.swing.JFrame {
         sliderZoom.setValue(0);
         sliderZoom.setValueIsAdjusting(true);
         sliderZoom.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-                sliderZoomAncestorMoved(evt);
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 sliderZoomAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                sliderZoomAncestorMoved(evt);
             }
         });
 
@@ -562,12 +566,40 @@ public class Tela extends javax.swing.JFrame {
         });
         btFiltros.add(btRuidos);
 
-        btBordas.setText("Detecção de Bordas");
-        btBordas.addActionListener(new java.awt.event.ActionListener() {
+        btBordas.setText("Detectar Bordas");
+
+        btBordasSobel.setText("Detecção de Bordas - Sobel");
+        btBordasSobel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBordasActionPerformed(evt);
+                btBordasSobelActionPerformed(evt);
             }
         });
+        btBordas.add(btBordasSobel);
+
+        btBordasRoberts.setText("Detecção de Bordas - Roberts");
+        btBordasRoberts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBordasRobertsActionPerformed(evt);
+            }
+        });
+        btBordas.add(btBordasRoberts);
+
+        btBordasRobinson.setText("Detecção de Bordas - Robinson ");
+        btBordasRobinson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBordasRobinsonActionPerformed(evt);
+            }
+        });
+        btBordas.add(btBordasRobinson);
+
+        btBordasKirsch.setText("Detecção de Bordas - Kirsch");
+        btBordasKirsch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBordasKirschActionPerformed(evt);
+            }
+        });
+        btBordas.add(btBordasKirsch);
+
         btFiltros.add(btBordas);
 
         jMenuBar1.add(btFiltros);
@@ -789,10 +821,25 @@ public class Tela extends javax.swing.JFrame {
         this.showImage(this.imagemObj.createImagemByMatriz(matriz));
     }//GEN-LAST:event_btContrasteMenosActionPerformed
 
-    private void btBordasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBordasActionPerformed
-        Integer matriz[][][] = this.imagemObj.getBordas(30);
+    private void btBordasRobertsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBordasRobertsActionPerformed
+        Integer matriz[][][] = this.imagemObj.getBordasRoberts(20);
         this.showImage(this.imagemObj.createImagemByMatriz(matriz));
-    }//GEN-LAST:event_btBordasActionPerformed
+    }//GEN-LAST:event_btBordasRobertsActionPerformed
+
+    private void btBordasSobelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBordasSobelActionPerformed
+         Integer matriz[][][] = this.imagemObj.getBordasSobel(100);
+        this.showImage(this.imagemObj.createImagemByMatriz(matriz));
+    }//GEN-LAST:event_btBordasSobelActionPerformed
+
+    private void btBordasRobinsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBordasRobinsonActionPerformed
+        Integer matriz[][][] = this.imagemObj.getBordasRobinson(100);
+        this.showImage(this.imagemObj.createImagemByMatriz(matriz));
+    }//GEN-LAST:event_btBordasRobinsonActionPerformed
+
+    private void btBordasKirschActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBordasKirschActionPerformed
+        Integer matriz[][][] = this.imagemObj.getBordasKirsch(200);
+        this.showImage(this.imagemObj.createImagemByMatriz(matriz));
+    }//GEN-LAST:event_btBordasKirschActionPerformed
 
     public static File getApplicationImagesPath(){
        File folder = new File("./imagens/");
@@ -847,7 +894,11 @@ public class Tela extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem bAbrirImagem;
-    private javax.swing.JMenuItem btBordas;
+    private javax.swing.JMenu btBordas;
+    private javax.swing.JMenuItem btBordasKirsch;
+    private javax.swing.JMenuItem btBordasRoberts;
+    private javax.swing.JMenuItem btBordasRobinson;
+    private javax.swing.JMenuItem btBordasSobel;
     private javax.swing.JMenu btBrilho;
     private javax.swing.JMenuItem btBrilhoMais;
     private javax.swing.JMenuItem btBrilhoMenos;

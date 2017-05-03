@@ -25,10 +25,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.statistics.HistogramDataset;
 import org.jfree.chart.JFreeChart;
 
-/**
- *
- * @author dn34083
- */
 public class Imagem {
     private String imagem_path;
     public BufferedImage imagem = null;
@@ -40,7 +36,16 @@ public class Imagem {
     private Integer[][][] matriz_bkp = null;
     private Integer[][][] matrizCinza;
     private double[][] matriz_multiplicacao = new double[3][3];
-    private Integer[][] matriz_kernel = new Integer[3][3];
+    
+    private Integer[][] matriz_mask1 = new Integer[3][3];
+    private Integer[][] matriz_mask2 = new Integer[3][3];
+    private Integer[][] matriz_mask3 = new Integer[3][3];
+    private Integer[][] matriz_mask4 = new Integer[3][3];
+    private Integer[][] matriz_mask5 = new Integer[3][3];
+    private Integer[][] matriz_mask6 = new Integer[3][3];
+    private Integer[][] matriz_mask7 = new Integer[3][3];
+    private Integer[][] matriz_mask8 = new Integer[3][3];
+    private int valores[] = new int[8];
     
     public Imagem(){
         this.resetMatrizMult();
@@ -80,26 +85,11 @@ public class Imagem {
         }
         return null;
     }
-
-//    public BufferedImage get_imagem_cinza() {
-//        BufferedImage img_cinza = new BufferedImage(this.largura, this.altura, BufferedImage.TYPE_BYTE_GRAY);
-//        WritableRaster wRastro = img_cinza.getRaster();
-//
-//        for (int x = 0; x < this.largura; x++) {
-//            for (int y = 0; y < this.altura; y++) {
-//                int[] px = {this.matriz_cinza[x][y], this.matriz_cinza[x][y], this.matriz_cinza[x][y]};
-//                wRastro.setPixel(x, y, px);
-//            }
-//        }
-//        img_cinza.setData(wRastro);
-//        return img_cinza;
-//    }
+   
      public BufferedImage getImagemExercicio(String selectedItem) {
-          System.out.println(selectedItem);
         BufferedImage imgExercicio = new BufferedImage(this.largura, this.altura, BufferedImage.TYPE_INT_RGB);
         WritableRaster wRastro = imgExercicio.getRaster();
         String exercicio = selectedItem;
-       // System.out.println("teste");
         int comparar = 150;
         double mediaD =  Double.parseDouble(getMedia());
         int media = (int) mediaD;
@@ -107,7 +97,6 @@ public class Imagem {
         int mediana = (int) medianaD;
         double modaD =  Double.parseDouble(getModa());
         int moda = (int) modaD;
-
 
         for (int x = 0; x < this.largura; x++) {
             for (int y = 0; y < this.altura; y++) {
@@ -122,7 +111,6 @@ public class Imagem {
                     if(cor > media){
                         cor = 255;
                     }
-                    
                 }else if(exercicio == "E"){  //Valores maiores que a media de toda a imagem recebem Branco, e menores recebem preto
                     if(cor < mediana){
                         cor = 0;
@@ -187,6 +175,7 @@ public class Imagem {
         painel.setVisible(true);
         painel.add(pnlChart);
     }
+    
     public Integer[][] getMatrizCinzaCalc() {
         Integer[][] matriz = new Integer[this.largura][this.altura];
         Raster rastro = this.imagem.getData();
@@ -203,15 +192,12 @@ public class Imagem {
                 double red = px[0] * 0.5;//converte vermelho para tom cinza
                 double green = px[1] * 0.419;//converte verde para tom cinza
                 double blue = px[2] * 0.081;//converte azul para tom cinza
-//                double red = px[0] * 0.3;//converte vermelho para tom cinza
-//                double green = px[1] * 0.59;//converte verde para tom cinza
-//                double blue = px[2] * 0.11;//converte azul para tom cinza
                 matriz[x][y] = (int) Math.round(red + green + blue);//seta as novas cores do pixel
-
             }
         }
         return matriz;
     }
+    
     //Tratar os valores Brancos
     public Integer[][][] getMatrizCinza() {
         Integer[][][] matriz = new Integer[this.largura][this.altura][3];
@@ -228,9 +214,6 @@ public class Imagem {
                 matriz[x][y][0] = (int) (red + green + blue);//seta as novas cores do pixel
                 matriz[x][y][1]= (int) (red + green + blue);//seta as novas cores do pixel
                 matriz[x][y][2] = (int)(red + green + blue);//seta as novas cores do pixel
-//                matriz[x][y][0] = (int) Math.round(red + green + blue);//seta as novas cores do pixel
-//                matriz[x][y][1]= (int) Math.round(red + green + blue);//seta as novas cores do pixel
-//                matriz[x][y][2] = (int) Math.round(red + green + blue);//seta as novas cores do pixel
             }
         }
         
@@ -239,32 +222,6 @@ public class Imagem {
         return matriz;
     }
     
-//    public Integer[][][] getMatrizCinza() {
-//        Integer[][][] matriz = new Integer[this.largura][this.altura][3];
-//        Raster rastro = this.imagem.getData();
-//        int px[] = new int[3];
-//        this.matriz_original = new Integer[this.largura][this.altura][px.length];
-//        for (int x = 0; x < this.largura; x++) {
-//            for (int y = 0; y < this.altura; y++) {
-//                for (int b = 0; b < px.length; b++) {
-//                    px[b] = rastro.getSample(x, y, b);
-//                }
-//                this.matriz_original[x][y][0] = rastro.getSample(x, y, 0);
-//                this.matriz_original[x][y][1] = rastro.getSample(x, y, 1);
-//                this.matriz_original[x][y][2] = rastro.getSample(x, y, 2);
-//                double red = px[0] * 0.2125;//converte vermelho para tom cinza
-//                double green = px[1] * 0.7154;//converte verde para tom cinza
-//                double blue = px[2] * 0.0721;//converte azul para tom cinza
-//                matriz[x][y][0] = (int) Math.round(red + green + blue);//seta as novas cores do pixel
-//                matriz[x][y][1]= (int) Math.round(red + green + blue);//seta as novas cores do pixel
-//                matriz[x][y][2] = (int) Math.round(red + green + blue);//seta as novas cores do pixel
-//            }
-//        }
-//        this.matriz_temp = this.matriz_original;
-//        matriz_original = matriz;
-//        return matriz;
-//    }
-//    
     public String getMedia( ){
         double media = 0;
         String aux;
@@ -278,9 +235,8 @@ public class Imagem {
         aux = String.valueOf(media);
         return aux; 
     }
-    
-    
-     public String getMediana(){
+
+    public String getMediana(){
         double mediana = 0;
         String aux;
         int index = 0;
@@ -299,7 +255,7 @@ public class Imagem {
     }
     
 
-        public String getModa(){
+    public String getModa(){
         int moda = 0;
         String aux;
         Integer[] vtCores = new Integer[256];
@@ -346,13 +302,14 @@ public class Imagem {
         return format.format(variancia);
         
     }
-     public Integer[][][] resetMatriz(){
-
-       // Integer[][][] matrizRetorno = new Integer[this.largura][this.altura][3];
+     
+    public Integer[][][] resetMatriz(){
         matriz_original = matriz_temp;
         return matriz_original;
      }
-public Integer[][][] multiplicaMatriz(double xoffset,double yoffset,double zoom){
+    
+    
+    public Integer[][][] multiplicaMatriz(double xoffset,double yoffset,double zoom){
         int minX = 0;
         int minY = 0;
         double tempLargura=largura * zoom;
@@ -393,11 +350,7 @@ public Integer[][][] multiplicaMatriz(double xoffset,double yoffset,double zoom)
         if(xoffset != 0 || yoffset != 0){
             matriz_retorno = multiplicaMatriz(xoffset, yoffset,zoom);//a posição inicial precisa ser 0
         }
-
         matriz_original = matriz_retorno;
-
-       // this.matriz_cinza = getMatrizCinza();
-
         return matriz_retorno;
     }
 
@@ -434,19 +387,16 @@ public Integer[][][] multiplicaMatriz(double xoffset,double yoffset,double zoom)
         matriz_original = this.multiplicaMatriz(0, 0,1);
         return matriz_original;
     }
-        public Integer[][][] getZoom(double nivel){
+        
+    public Integer[][][] getZoom(double nivel){
         this.resetMatrizMult();
         this.setXYMatrizMult(0, 0, nivel);
         this.setXYMatrizMult(1, 1, nivel);
         this.setXYMatrizMult(2, 2, 1);
         
-//        for(int x=0;x<this.largura;x++){
-//            for(int y=0;y<this.altura;y++){
-//                matriz_original[x][y] = this.matriz_original[ x * (int)nivel][y* (int) nivel];
-//            }    
-//        }       
         matriz_original = this.multiplicaMatriz(0,0,nivel); 
         return matriz_original;
+
     }
         
         
@@ -459,7 +409,6 @@ public Integer[][][] multiplicaMatriz(double xoffset,double yoffset,double zoom)
         this.setXYMatrizMult(1, 1, 1);
         this.setXYMatrizMult(2, 2, 1);
         
-        //matriz_temp = matriz_original;
         matriz_original = this.multiplicaMatriz(0, 0,1);
         return this.multiplicaMatriz(0, 0,1);
         
@@ -577,10 +526,8 @@ public Integer[][][] multiplicaMatriz(double xoffset,double yoffset,double zoom)
         for(int x=0;x<this.largura;x++){
             for(int y=0;y<this.altura;y++){
                 Integer[] px = this.matriz_original[x][y];
-               /// System.out.println(px);
                 Integer[] aux = new Integer[3];    
                     for(int j=0;j<3;j++){
-                  //      System.out.println(px[j]);
                         aux[j] = (a * px[j] )+b;
                         if(aux[j] > 255){
                             aux[j] = 255;
@@ -588,12 +535,10 @@ public Integer[][][] multiplicaMatriz(double xoffset,double yoffset,double zoom)
                         if(aux[j] < 0){
                             aux[j] = 0;
                         }
-                    //     System.out.println(px[j]);
                     }
                 matriz_retorno [x][y] = aux;
             }
         }
-     //matriz_temp = matriz_original;  
      matriz_original = matriz_retorno;
      return matriz_retorno;
 
@@ -606,10 +551,8 @@ public Integer[][][] multiplicaMatriz(double xoffset,double yoffset,double zoom)
         for(int x=0;x<this.largura;x++){
             for(int y=0;y<this.altura;y++){
                 Integer[] px = this.matriz_original[x][y];
-               /// System.out.println(px);
                 Integer[] aux = new Integer[3];    
                     for(int j=0;j<3;j++){
-                  //      System.out.println(px[j]);
                         aux[j] = (int)(a * px[j] )+b;
                         if(aux[j] > 255){
                             aux[j] = 255;
@@ -617,43 +560,168 @@ public Integer[][][] multiplicaMatriz(double xoffset,double yoffset,double zoom)
                         if(aux[j] < 0){
                             aux[j] = 0;
                         }
-                    //     System.out.println(px[j]);
                     }
                 matriz_retorno [x][y] = aux;
             }
         }
-     //matriz_temp = matriz_original;
-     matriz_original = matriz_retorno;
-     return matriz_retorno;
+        matriz_original = matriz_retorno;
+        return matriz_retorno;
     }
     
-    public void setKernel(int P1,int P2,int P3,int P4,int P5,int P6,int P7,int P8,int P9){
+    public void setMask1(int P1,int P2,int P3,int P4,int P5,int P6,int P7,int P8,int P9){
         for(int i=0;i<3;i++){
             for(int j=0;j<3;j++){
-                matriz_kernel[i][j]=0;
+                matriz_mask1[i][j]=0;
             }
         }
-        matriz_kernel[0][0] = P1;
-        matriz_kernel[0][1] = P2;
-        matriz_kernel[0][2] = P3;        
-        matriz_kernel[1][0] = P4;
-        matriz_kernel[1][1] = P5;
-        matriz_kernel[1][2] = P6;        
-        matriz_kernel[2][0] = P7;
-        matriz_kernel[2][1] = P8;
-        matriz_kernel[2][2] = P9;
+        
+        matriz_mask1[0][0] = P1;
+        matriz_mask1[0][1] = P2;
+        matriz_mask1[0][2] = P3;        
+        matriz_mask1[1][0] = P4;
+        matriz_mask1[1][1] = P5;
+        matriz_mask1[1][2] = P6;        
+        matriz_mask1[2][0] = P7;
+        matriz_mask1[2][1] = P8;
+        matriz_mask1[2][2] = P9;
+    }
+    
+    public void setMask2(int P1,int P2,int P3,int P4,int P5,int P6,int P7,int P8,int P9){
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                matriz_mask2[i][j]=0;
+            }
+        }
+        
+        matriz_mask2[0][0] = P1;
+        matriz_mask2[0][1] = P2;
+        matriz_mask2[0][2] = P3;        
+        matriz_mask2[1][0] = P4;
+        matriz_mask2[1][1] = P5;
+        matriz_mask2[1][2] = P6;        
+        matriz_mask2[2][0] = P7;
+        matriz_mask2[2][1] = P8;
+        matriz_mask2[2][2] = P9;
+    }
+   
+    public void setMask3(int P1,int P2,int P3,int P4,int P5,int P6,int P7,int P8,int P9){
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                matriz_mask3[i][j]=0;
+            }
+        }
+        
+        matriz_mask3[0][0] = P1;
+        matriz_mask3[0][1] = P2;
+        matriz_mask3[0][2] = P3;        
+        matriz_mask3[1][0] = P4;
+        matriz_mask3[1][1] = P5;
+        matriz_mask3[1][2] = P6;        
+        matriz_mask3[2][0] = P7;
+        matriz_mask3[2][1] = P8;
+        matriz_mask3[2][2] = P9;
+    }
+    
+    public void setMask4(int P1, int P2, int P3, int P4, int P5, int P6, int P7, int P8, int P9) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                matriz_mask4[i][j] = 0;
+            }
+        }
+
+        matriz_mask4[0][0] = P1;
+        matriz_mask4[0][1] = P2;
+        matriz_mask4[0][2] = P3;
+        matriz_mask4[1][0] = P4;
+        matriz_mask4[1][1] = P5;
+        matriz_mask4[1][2] = P6;
+        matriz_mask4[2][0] = P7;
+        matriz_mask4[2][1] = P8;
+        matriz_mask4[2][2] = P9;
+    }
+    
+    public void setMask5(int P1, int P2, int P3, int P4, int P5, int P6, int P7, int P8, int P9) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                matriz_mask5[i][j] = 0;
+            }
+        }
+
+        matriz_mask5[0][0] = P1;
+        matriz_mask5[0][1] = P2;
+        matriz_mask5[0][2] = P3;
+        matriz_mask5[1][0] = P4;
+        matriz_mask5[1][1] = P5;
+        matriz_mask5[1][2] = P6;
+        matriz_mask5[2][0] = P7;
+        matriz_mask5[2][1] = P8;
+        matriz_mask5[2][2] = P9;
+    }
+    
+    public void setMask6(int P1, int P2, int P3, int P4, int P5, int P6, int P7, int P8, int P9) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                matriz_mask6[i][j] = 0;
+            }
+        }
+
+        matriz_mask6[0][0] = P1;
+        matriz_mask6[0][1] = P2;
+        matriz_mask6[0][2] = P3;
+        matriz_mask6[1][0] = P4;
+        matriz_mask6[1][1] = P5;
+        matriz_mask6[1][2] = P6;
+        matriz_mask6[2][0] = P7;
+        matriz_mask6[2][1] = P8;
+        matriz_mask6[2][2] = P9;
+    }
+    
+    public void setMask7(int P1, int P2, int P3, int P4, int P5, int P6, int P7, int P8, int P9) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                matriz_mask7[i][j] = 0;
+            }
+        }
+
+        matriz_mask7[0][0] = P1;
+        matriz_mask7[0][1] = P2;
+        matriz_mask7[0][2] = P3;
+        matriz_mask7[1][0] = P4;
+        matriz_mask7[1][1] = P5;
+        matriz_mask7[1][2] = P6;
+        matriz_mask7[2][0] = P7;
+        matriz_mask7[2][1] = P8;
+        matriz_mask7[2][2] = P9;
+    }
+    
+    public void setMask8(int P1, int P2, int P3, int P4, int P5, int P6, int P7, int P8, int P9) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                matriz_mask8[i][j] = 0;
+            }
+        }
+
+        matriz_mask8[0][0] = P1;
+        matriz_mask8[0][1] = P2;
+        matriz_mask8[0][2] = P3;
+        matriz_mask8[1][0] = P4;
+        matriz_mask8[1][1] = P5;
+        matriz_mask8[1][2] = P6;
+        matriz_mask8[2][0] = P7;
+        matriz_mask8[2][1] = P8;
+        matriz_mask8[2][2] = P9;
     }
     
     Integer[][][] getGauss() {        
         getMatrizCinza();
         double somatorio = 0;
-        setKernel(1, 2, 1, 2, 4, 2, 1, 2, 1);
+        setMask1(1, 2, 1, 2, 4, 2, 1, 2, 1);
         for (int x = 2; x < this.largura-2; x++) {
             for (int y = 2; y < this.altura-2; y++) {
                 somatorio = 0;
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
-                        somatorio += matriz_original[x + (j-1)][y+(i-1)][0] * matriz_kernel[i][j];
+                        somatorio += matriz_original[x + (j-1)][y+(i-1)][0] * matriz_mask1[i][j];
                     }
                 }
                 
@@ -666,7 +734,7 @@ public Integer[][][] multiplicaMatriz(double xoffset,double yoffset,double zoom)
     }
     
     
-    public Integer[][][] getBordas(int threshold) {
+    public Integer[][][] getBordasRoberts(int threshold) {
         Integer[][][] matriz = new Integer[this.largura][this.altura][3];
         int cor, tmp, gY, gX;
 
@@ -696,6 +764,161 @@ public Integer[][][] multiplicaMatriz(double xoffset,double yoffset,double zoom)
         matriz_original = matriz;
         return matriz;
     }
+    
+    public Integer[][][] getBordasSobel(int Threshold) {
+        Integer[][][] matriz = new Integer[this.largura][this.altura][3];
+        double v, gx, gy, g = 0;
+        setMask1(1, 0, -1, 2, 0, -2, 1, 0, -1);
+        setMask2(1, 2, 1, 0, 0, 0, -1, -2, -1);
+        int cor;
+
+        for (int y = 2; y < this.altura - 2; y++) {
+            for (int x = 2; x < this.largura - 2; x++) {
+                gx=0;
+                gy=0;
+                for (int i = 0; i < 3; i++) {
+                   for (int j = 0; j < 3; j++) {                       
+                       Integer px1[] = this.matriz_original[x + (i - 1)][y + (j - 1)];
+                       gx += px1[0] * matriz_mask1[i][j];
+                       gy += px1[0] * matriz_mask2[i][j];
+                   } 
+                }
+              
+                g = (int) Math.sqrt(Math.pow(gx,2) + Math.pow(gy,2));
+                cor = 0;
+                 if (g > Threshold){
+                      cor = 255;
+                 }    
+                 
+                matriz[x][y][0] = cor;
+                matriz[x][y][1] = cor;
+                matriz[x][y][2] = cor;       
+                                       
+            }
+        }
+        matriz_original = matriz;
+        return matriz;
+    }
+    
+
+    public int RetornaMaior(){
+        int maior = -1;
+        for(int i=0;i<8;i++){
+            if (valores[i] > maior){
+                maior= valores[i];
+            }
+        }  
+        return maior;
+    }
+    
+    public Integer[][][] getBordasRobinson(int Threshold) {
+        Integer[][][] matriz = new Integer[this.largura][this.altura][3];
+        double g = 0;
+        setMask1(1, 0, -1, 2, 0, -2, 1, 0, -1);
+        setMask2(0, -1, -2, 1, 0, -1, 2, 1, 0);
+        setMask3(-1, -2, -1, 0, 0, 0, 1, 2, 1);
+        setMask4(-2, -1, 0, -1, 0, 1, 0, 1, 2);
+        setMask5(-1, 0, 1, -2, 0, 2, -1, 0, 1);
+        setMask6(0, 1, 2, -1, 0, 1, -2, -1, 0);
+        setMask7(1, 2, 1, 0, 0, 0, -1, -2, -1);
+        setMask8(2, 1, 0, 1, 0, -1, 0, -1, -2);
+        int cor;
+
+        for (int y = 2; y < this.altura - 2; y++) {
+            for (int x = 2; x < this.largura - 2; x++) {
+                
+                for (int i = 0; i < 8; i++) {
+                    valores[i] = 0;
+                }
+
+                for (int i = 0; i < 3; i++) {
+                   for (int j = 0; j < 3; j++) {                       
+                       Integer px1[] = this.matriz_original[x + (i - 1)][y + (j - 1)];
+                       valores[0] += px1[0] * matriz_mask1[i][j];
+                       valores[2] += px1[0] * matriz_mask2[i][j];
+                       valores[2] += px1[0] * matriz_mask3[i][j];
+                       valores[3] += px1[0] * matriz_mask4[i][j];
+                       valores[4] += px1[0] * matriz_mask5[i][j];
+                       valores[5] += px1[0] * matriz_mask6[i][j];
+                       valores[6] += px1[0] * matriz_mask7[i][j];
+                       valores[7] += px1[0] * matriz_mask8[i][j];
+                       
+                   } 
+                }
+              
+                g = RetornaMaior();
+
+                cor = 0;
+                
+                if (g > Threshold){
+                    cor = 255;
+                }
+                 
+                matriz[x][y][0] = cor;
+                matriz[x][y][1] = cor;
+                matriz[x][y][2] = cor;    
+            }
+        }
+        matriz_original = matriz;
+        return matriz;
+    }
+    public Integer[][][] getBordasKirsch(int Threshold) {
+        Integer[][][] matriz = new Integer[this.largura][this.altura][3];
+        double g = 0;
+        setMask1(5, -3, -3, 5, 0, -3, 5, -3, -3);
+        setMask2(-3, -3, -3, 5, 0, -3, 5, 5, -3);
+        setMask3(-3, -3, -3, -3, 0, -3, 5, 5, 5);
+        setMask4(-3, -3, -3, -3, 0, 5, -3, 5, 5);
+        setMask5(-3, -3, 5, -3, 0, 5, -3, -3, 5);
+        setMask6(-3, 5, 5, -3, 0, 5, -3, -3, -3);
+        setMask7(5, 5, 5, -3, 0, -3, -3, -3, -3);
+        setMask8(5, 5, -3, 5, 0, -3, -3, -3, -3);
+
+        int cor;
+
+        for (int y = 2; y < this.altura - 2; y++) {
+            for (int x = 2; x < this.largura - 2; x++) {
+                
+                for (int i = 0; i < 8; i++) {
+                    valores[i] = 0;
+                }
+
+                for (int i = 0; i < 3; i++) {
+                   for (int j = 0; j < 3; j++) {                       
+                       Integer px1[] = this.matriz_original[x + (i - 1)][y + (j - 1)];
+                       valores[0] += px1[0] * matriz_mask1[i][j];
+                       valores[2] += px1[0] * matriz_mask2[i][j];
+                       valores[2] += px1[0] * matriz_mask3[i][j];
+                       valores[3] += px1[0] * matriz_mask4[i][j];
+                       valores[4] += px1[0] * matriz_mask5[i][j];
+                       valores[5] += px1[0] * matriz_mask6[i][j];
+                       valores[6] += px1[0] * matriz_mask7[i][j];
+                       valores[7] += px1[0] * matriz_mask8[i][j];
+                       
+                   } 
+                }
+              
+                g = RetornaMaior();
+
+                cor = 0;
+                
+                if (g > Threshold){
+                    cor = 255;
+                }
+                 
+                matriz[x][y][0] = cor;
+                matriz[x][y][1] = cor;
+                matriz[x][y][2] = cor;    
+            }
+        }
+        matriz_original = matriz;
+        return matriz;
+    }
+ 
+    
+    
+    
+    
 
     
 }    

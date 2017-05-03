@@ -140,14 +140,45 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btRuidosActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="btBordas">
+            <Menu class="javax.swing.JMenu" name="btBordas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Detec&#xe7;&#xe3;o de Bordas"/>
+                <Property name="text" type="java.lang.String" value="Detectar Bordas"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBordasActionPerformed"/>
-              </Events>
-            </MenuItem>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="btBordasSobel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Detec&#xe7;&#xe3;o de Bordas - Sobel"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBordasSobelActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="btBordasRoberts">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Detec&#xe7;&#xe3;o de Bordas - Roberts"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBordasRobertsActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="btBordasRobinson">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Detec&#xe7;&#xe3;o de Bordas - Robinson "/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBordasRobinsonActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="btBordasKirsch">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Detec&#xe7;&#xe3;o de Bordas - Kirsch"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBordasKirschActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
           </SubComponents>
         </Menu>
       </SubComponents>
