@@ -391,13 +391,13 @@ public class Tela extends javax.swing.JFrame {
         sliderZoom.setValue(0);
         sliderZoom.setValueIsAdjusting(true);
         sliderZoom.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                sliderZoomAncestorMoved(evt);
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 sliderZoomAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-                sliderZoomAncestorMoved(evt);
             }
         });
 
