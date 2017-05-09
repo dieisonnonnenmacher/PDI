@@ -915,63 +915,113 @@ public class Imagem {
         return matriz;
     }
  
-   public Integer[][][] erosao(int fundo){
-        //Integer[][][] matriz = new Integer[this.largura][this.altura][3];
-        Integer[][] matriz_estruturante = new Integer[3][3];
-        matriz_estruturante[0][0] = 1;
-        matriz_estruturante[1][0] = 1;
-        matriz_estruturante[2][0] = 1;
-        matriz_estruturante[0][1] = 1;
-        matriz_estruturante[1][1] = 1;
-        matriz_estruturante[2][1] = 1;
-        matriz_estruturante[0][2] = 1;
-        matriz_estruturante[1][2] = 1;
-        matriz_estruturante[2][2] = 1;
-        Integer[][][] matriz_aux = new Integer[this.largura][this.altura][3];
-        for(int x = 0;x<this.largura-1;x++){
-            for(int y = 0;y<this.altura-1;y++){
-                Integer[] min = this.matriz_temp[x][y];
-                for(int m=0;m<3;m++){
-                    for(int i = 0;i<matriz_estruturante.length;i++){
-                        if(x+i>=this.largura){
-                            break;
-                        }
-                        for(int j = 0; j<matriz_estruturante.length;j++){
-                            if(y+j>=this.altura){
-                                break;
-                            }
-                            
-                            if(this.matriz_temp[x+i][y+j][m] != fundo && matriz_estruturante[i][j] != null){
-                                if(fundo <=128){
-                                    min[m] = Math.min(min[m], this.matriz_temp[x+i][y+j][m]);
-                                }else{
-                                    min[m] = Math.max(min[m], this.matriz_temp[x+i][y+j][m]);
-                                }
-                            }
-                        }
-                    }
-                    for(int i = 0;i<matriz_estruturante.length;i++){
-                        if(x+i>=this.largura){
-                            break;
-                        }
-                        for(int j = 0; j<matriz_estruturante.length;j++){
-                            if(y+j>=this.altura){
-                                break;
-                            }
-                            if(matriz_estruturante[i][j] != null){
-                                matriz_aux[x+i][y+j][m] = min[m]+matriz_estruturante[i][j];
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        matriz_original = matriz;
-        return matriz;
-    }
+//   public Integer[][][] erosao(int fundo){
+//        //fundo = 255;
+//        //Integer[][][] matriz = new Integer[this.largura][this.altura][3];
+//        Integer[][] matriz_estruturante = new Integer[3][3];
+//        matriz_estruturante[0][0] = 1;
+//        matriz_estruturante[1][0] = 1;
+//        matriz_estruturante[2][0] = 1;
+//        matriz_estruturante[0][1] = 1;
+//        matriz_estruturante[1][1] = 1;
+//        matriz_estruturante[2][1] = 1;
+//        matriz_estruturante[0][2] = 1;
+//        matriz_estruturante[1][2] = 1;
+//        matriz_estruturante[2][2] = 1;
+//        Integer[][][] matriz_aux = new Integer[this.largura][this.altura][3];
+//        for(int x = 0;x<this.largura-1;x++){
+//            for(int y = 0;y<this.altura-1;y++){
+//                Integer[] min = this.matriz_temp[x][y];
+//                for(int m=0;m<3;m++){
+//                    for(int i = 0;i<matriz_estruturante.length;i++){
+//                        if(x+i>=this.largura){
+//                            break;
+//                        }
+//                        for(int j = 0; j<matriz_estruturante.length;j++){
+//                            if(y+j>=this.altura){
+//                                break;
+//                            }
+//                            
+//                            if(this.matriz_original[x+i][y+j][m] != fundo && matriz_estruturante[i][j] != null){
+//                                if(fundo <=128){
+//                                    min[m] = Math.min(min[m], this.matriz_original[x+i][y+j][m]);
+//                                }else{
+//                                    min[m] = Math.max(min[m], this.matriz_original[x+i][y+j][m]);
+//                                }
+//                            }
+//                        }
+//                    }
+//                    for(int i = 0;i<matriz_estruturante.length;i++){
+//                        if(x+i>=this.largura){
+//                            break;
+//                        }
+//                        for(int j = 0; j<matriz_estruturante.length;j++){
+//                            if(y+j>=this.altura){
+//                                break;
+//                            }
+//                            if(matriz_estruturante[i][j] != null){
+//                                matriz_aux[x+i][y+j][m] = min[m]+matriz_estruturante[i][j];
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        
+//
+//        matriz_temp = matriz_original;
+//        return matriz_original;
+//    }
     
-    
+//	public Integer[][][] dila(){
+//        Integer[][] matriz_estruturante = new Integer[3][3];
+//        matriz_estruturante[0][0] = 1;
+//        matriz_estruturante[1][0] = 1;
+//        matriz_estruturante[2][0] = 1;
+//        matriz_estruturante[0][1] = 1;
+//        matriz_estruturante[1][1] = 1;
+//        matriz_estruturante[2][1] = 1;
+//        matriz_estruturante[0][2] = 1;
+//        matriz_estruturante[1][2] = 1;
+//        matriz_estruturante[2][2] = 1;
+//        Integer[][][] matriz_aux = new Integer[this.largura][this.altura][3];
+//        for(int x = 0;x<this.largura-1;x++){
+//            for(int y = 0;y<this.altura-1;y++){
+//                Integer[] min = matrizCinza[x][y];
+//                for(int m=0;m<3;m++){
+//                    for(int i = 0;i<matriz_estruturante.length;i++){
+//                        if(x+i>=this.largura){
+//                            break;
+//                        }
+//                        for(int j = 0; j<matriz_estruturante.length;j++){
+//                            if(y+j>=this.altura){
+//                                break;
+//                            }
+//                            
+//                            if(matrizCinza[x+i][y+j][m] != 255 && matriz_estruturante[i][j] != null){
+//                                min[m] = Math.min(min[m], matrizCinza[x+i][y+j][m]);
+//                            }
+//                        }
+//                    }
+//                    for(int i = 0;i<matriz_estruturante.length;i++){
+//                        if(x+i>=this.largura){
+//                            break;
+//                        }
+//                        for(int j = 0; j<matriz_estruturante.length;j++){
+//                            if(y+j>=this.altura){
+//                                break;
+//                            }
+//                            if(matriz_estruturante[i][j] != null){
+//                                matriz_aux[x+i][y+j][m] = min[m]+matriz_estruturante[i][j];
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        
+//        return matrizCinza;
+//    }    
     
 
     

@@ -110,6 +110,8 @@ public class Tela extends javax.swing.JFrame {
         btContraste = new javax.swing.JMenu();
         btContrasteMais = new javax.swing.JMenuItem();
         btContrasteMenos = new javax.swing.JMenuItem();
+        btErosao = new javax.swing.JMenuItem();
+        btDilatacao = new javax.swing.JMenuItem();
         btTonsCinza = new javax.swing.JMenu();
         btCinza = new javax.swing.JMenuItem();
         btFiltros = new javax.swing.JMenu();
@@ -391,13 +393,13 @@ public class Tela extends javax.swing.JFrame {
         sliderZoom.setValue(0);
         sliderZoom.setValueIsAdjusting(true);
         sliderZoom.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-                sliderZoomAncestorMoved(evt);
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 sliderZoomAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                sliderZoomAncestorMoved(evt);
             }
         });
 
@@ -435,7 +437,7 @@ public class Tela extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder(0));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(8, 8));
 
         lblImagem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -443,7 +445,7 @@ public class Tela extends javax.swing.JFrame {
         lblImagem.setOpaque(true);
         jScrollPane1.setViewportView(lblImagem);
 
-        jScrollPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder(0));
         jScrollPane2.setViewportBorder(javax.swing.BorderFactory.createEtchedBorder());
         jScrollPane2.setMinimumSize(new java.awt.Dimension(25, 25));
 
@@ -541,6 +543,22 @@ public class Tela extends javax.swing.JFrame {
         btContraste.add(btContrasteMenos);
 
         btFuncoes.add(btContraste);
+
+        btErosao.setText("Erosao");
+        btErosao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btErosaoActionPerformed(evt);
+            }
+        });
+        btFuncoes.add(btErosao);
+
+        btDilatacao.setText("Dilatacao");
+        btDilatacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDilatacaoActionPerformed(evt);
+            }
+        });
+        btFuncoes.add(btDilatacao);
 
         jMenuBar1.add(btFuncoes);
 
@@ -841,6 +859,18 @@ public class Tela extends javax.swing.JFrame {
         this.showImage(this.imagemObj.createImagemByMatriz(matriz));
     }//GEN-LAST:event_btBordasKirschActionPerformed
 
+    private void btErosaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btErosaoActionPerformed
+        // TODO add your handling code here:
+//        Integer matriz[][][] = this.imagemObj.erosao(255);
+//        this.showImage(this.imagemObj.createImagemByMatriz(matriz));
+    }//GEN-LAST:event_btErosaoActionPerformed
+
+    private void btDilatacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDilatacaoActionPerformed
+        // TODO add your handling code here:
+        //        Integer matriz[][][] = this.imagemObj.dila();
+        //        this.showImage(this.imagemObj.createImagemByMatriz(matriz));
+    }//GEN-LAST:event_btDilatacaoActionPerformed
+
     public static File getApplicationImagesPath(){
        File folder = new File("./imagens/");
        return folder;
@@ -907,7 +937,9 @@ public class Tela extends javax.swing.JFrame {
     private javax.swing.JMenu btContraste;
     private javax.swing.JMenuItem btContrasteMais;
     private javax.swing.JMenuItem btContrasteMenos;
+    private javax.swing.JMenuItem btDilatacao;
     private javax.swing.JMenu btEdit;
+    private javax.swing.JMenuItem btErosao;
     private javax.swing.JToggleButton btEspelhar;
     private javax.swing.JButton btExercicio;
     private javax.swing.JMenu btFiltros;
